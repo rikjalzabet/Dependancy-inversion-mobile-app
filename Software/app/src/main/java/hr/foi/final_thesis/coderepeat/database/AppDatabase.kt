@@ -10,8 +10,10 @@ import hr.foi.final_thesis.coderepeat.entities.Task
 
 @Database(entities = [Level::class, Task::class, Streak::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
+    abstract fun sectionDao(): SectionDAO
     abstract fun levelDao(): LevelDAO
     abstract fun taskDao(): TaskDAO
+    abstract fun level_taskDao(): Level_TaskDAO
     abstract fun streakDao(): StreakDAO
 
     companion object{
