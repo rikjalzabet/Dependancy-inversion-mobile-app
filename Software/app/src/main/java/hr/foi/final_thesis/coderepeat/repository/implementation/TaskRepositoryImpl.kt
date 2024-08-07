@@ -11,9 +11,6 @@ class TaskRepositoryImpl(private val context: Context): TaskRepository {
         return db.taskDao().getAllTasks()
     }
 
-    override fun getTasksForLevel(levelId: Int): List<Task> {
-        return db.taskDao().getTasksForLevel(levelId)
-    }
     override fun getTaskById(taskId: Int): Task? {
         return db.taskDao().getTaskById(taskId)
     }

@@ -18,7 +18,7 @@ interface Level_TaskDAO {
     @Query("SELECT * FROM Level_Task")
     fun getAllLevel_Tasks(): List<Level_Task>
     @Insert
-    fun insertLevel_Task(level_task: Level_Task)
+    fun insertLevel_Task(level_task: Level_Task): Long
     @Update
     fun updateLevel_Task(level_task: Level_Task)
     @Query("DELETE FROM Level_Task WHERE levelId = :levelId AND taskId = :taskId")

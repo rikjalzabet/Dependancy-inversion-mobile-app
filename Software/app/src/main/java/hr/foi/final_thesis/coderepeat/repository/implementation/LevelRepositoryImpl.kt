@@ -16,6 +16,10 @@ class LevelRepositoryImpl(private val context: Context): LevelRepository {
         return db.levelDao().getLevelById(id)
     }
 
+    override fun getLevelsBySectionId(sectionId: Int): List<Level> {
+        return db.levelDao().getLevelsBySectionId(sectionId)
+    }
+
     override fun insertLevel(level: Level): Long {
         return db.levelDao().insertLevel(level)
     }
