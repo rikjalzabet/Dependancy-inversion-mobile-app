@@ -11,8 +11,6 @@ import hr.foi.final_thesis.coderepeat.entities.Task
 interface TaskDAO {
     @Query("SELECT * FROM Task")
     fun getAllTasks(): List<Task>
-    @Query("SELECT * FROM Task WHERE levelId = :levelId")
-    fun getTasksForLevel(levelId: Int): List<Task>
     @Query("SELECT * FROM Task WHERE id = :id")
     fun getTaskById(id: Int): Task?
     @Insert
