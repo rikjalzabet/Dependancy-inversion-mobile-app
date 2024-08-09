@@ -1,11 +1,11 @@
-package hr.foi.final_thesis.coderepeat.repository.implementation
+package hr.foi.final_thesis.coderepeat.interfaces.implementation
 
 import android.content.Context
 import hr.foi.final_thesis.coderepeat.database.AppDatabase
 import hr.foi.final_thesis.coderepeat.entities.Level
-import hr.foi.final_thesis.coderepeat.repository.LevelRepository
+import hr.foi.final_thesis.coderepeat.interfaces.ILevel
 
-class LevelRepositoryImpl(private val context: Context): LevelRepository {
+class Level_Intf_Impl(private val context: Context): ILevel {
     private val db = AppDatabase.getDatabase(context)
 
     override fun getAllLevels(): List<Level> {
@@ -14,10 +14,6 @@ class LevelRepositoryImpl(private val context: Context): LevelRepository {
 
     override fun getLevelById(id: Int): Level? {
         return db.levelDao().getLevelById(id)
-    }
-
-    override fun getLevelsBySectionId(sectionId: Int): List<Level> {
-        return db.levelDao().getLevelsBySectionId(sectionId)
     }
 
     override fun insertLevel(level: Level): Long {

@@ -10,9 +10,9 @@ import hr.foi.final_thesis.coderepeat.entities.Section
 
 @Dao
 interface SectionDAO {
-    @Query("SELECT * FROM section")
+    @Query("SELECT * FROM Section")
     fun getAllSections(): List<Section>
-    @Query("SELECT * FROM section WHERE id = :id")
+    @Query("SELECT * FROM Section WHERE id = :id")
     fun getSectionById(id: Int): Section
     @Insert
     fun insertSection(section: Section): Long
@@ -20,7 +20,6 @@ interface SectionDAO {
     fun updateSection(section: Section)
     @Delete
     fun deleteSection(section: Section)
-    @Query("DELETE FROM section WHERE id = :id")
+    @Query("DELETE FROM Section WHERE id = :id")
     fun deleteSectionById(id: Int)
-
 }

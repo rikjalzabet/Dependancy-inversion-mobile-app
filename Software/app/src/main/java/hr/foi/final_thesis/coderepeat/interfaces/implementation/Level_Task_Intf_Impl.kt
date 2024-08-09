@@ -1,13 +1,13 @@
-package hr.foi.final_thesis.coderepeat.repository.implementation
+package hr.foi.final_thesis.coderepeat.interfaces.implementation
 
 import android.content.Context
 import hr.foi.final_thesis.coderepeat.database.AppDatabase
 import hr.foi.final_thesis.coderepeat.entities.Level
 import hr.foi.final_thesis.coderepeat.entities.Level_Task
 import hr.foi.final_thesis.coderepeat.entities.Task
-import hr.foi.final_thesis.coderepeat.repository.Level_TaskRepository
+import hr.foi.final_thesis.coderepeat.interfaces.ILevel_Task
 
-class Level_TaskRepositoryImpl (private val context: Context) : Level_TaskRepository {
+class Level_Task_Intf_Impl (private val context: Context) : ILevel_Task {
     private val db = AppDatabase.getDatabase(context)
     override fun getTasksForLevel(levelId: Int): List<Task> {
         return db.level_taskDao().getTasksForLevel(levelId)
@@ -33,7 +33,7 @@ class Level_TaskRepositoryImpl (private val context: Context) : Level_TaskReposi
         db.level_taskDao().deleteLevel_Task(levelId, taskId)
     }
 
-    override fun deleteFromLevel_Task(levelId: Int, taskId: Int) {
-        db.level_taskDao().deleteFromLevel_Task(levelId, taskId)
+    override fun deleteFromLevel_Task(Level_Task: Level_Task) {
+        db.level_taskDao().deleteFromLevel_Task(Level_Task)
     }
 }

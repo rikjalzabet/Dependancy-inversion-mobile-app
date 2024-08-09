@@ -1,11 +1,11 @@
-package hr.foi.final_thesis.coderepeat.repository.implementation
+package hr.foi.final_thesis.coderepeat.interfaces.implementation
 
 import android.content.Context
 import hr.foi.final_thesis.coderepeat.database.AppDatabase
 import hr.foi.final_thesis.coderepeat.entities.Section
-import hr.foi.final_thesis.coderepeat.repository.SectionRepository
+import hr.foi.final_thesis.coderepeat.interfaces.ISection
 
-class SectionRepositoryImpl(private val context: Context): SectionRepository {
+class Section_Intf_Impl(private val context: Context): ISection {
     private val db = AppDatabase.getDatabase(context)
 
     override fun getAllSections(): List<Section> {

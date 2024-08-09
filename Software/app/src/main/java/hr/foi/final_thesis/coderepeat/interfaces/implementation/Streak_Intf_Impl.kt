@@ -1,11 +1,11 @@
-package hr.foi.final_thesis.coderepeat.repository.implementation
+package hr.foi.final_thesis.coderepeat.interfaces.implementation
 
 import android.content.Context
 import hr.foi.final_thesis.coderepeat.database.AppDatabase
 import hr.foi.final_thesis.coderepeat.entities.Streak
-import hr.foi.final_thesis.coderepeat.repository.StreakRepository
+import hr.foi.final_thesis.coderepeat.interfaces.IStreak
 
-class StreakRepositoryImpl(private val context: Context): StreakRepository {
+class Streak_Intf_Impl(private val context: Context): IStreak {
     private val db = AppDatabase.getDatabase(context)
     override fun getCurrentStreak(id: Int): Streak? {
         return db.streakDao().getCurrentStreak(id)

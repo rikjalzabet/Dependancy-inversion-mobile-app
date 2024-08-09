@@ -1,8 +1,8 @@
-package hr.foi.final_thesis.coderepeat.repository
+package hr.foi.final_thesis.coderepeat.interfaces
 
 import hr.foi.final_thesis.coderepeat.entities.Task
 
-interface TaskRepository {
+interface ITask {
     fun getAllTasks(): List<Task>
     fun getTaskById(taskId: Int): Task?
     fun insertTask(task: Task): Long

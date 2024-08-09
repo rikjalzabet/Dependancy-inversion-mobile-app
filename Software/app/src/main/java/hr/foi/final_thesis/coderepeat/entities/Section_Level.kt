@@ -5,24 +5,24 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 
 @Entity(
-    tableName = "Level_Task",
-    primaryKeys = ["levelId", "taskId"],
+    tableName = "Section_Level",
+    primaryKeys = ["sectionId", "levelId"],
     foreignKeys = [
+        ForeignKey(
+            entity = Section::class,
+            parentColumns = ["id"],
+            childColumns = ["sectionId"],
+            onDelete = CASCADE
+        ),
         ForeignKey(
             entity = Level::class,
             parentColumns = ["id"],
             childColumns = ["levelId"],
             onDelete = CASCADE
-        ),
-        ForeignKey(
-            entity = Task::class,
-            parentColumns = ["id"],
-            childColumns = ["taskId"],
-            onDelete = CASCADE
         )
     ]
 )
-data class Level_Task(
-    val levelId: Int,
-    val taskId: Int
+data class Section_Level(
+    val sectionId: Int,
+    val levelId: Int
 )

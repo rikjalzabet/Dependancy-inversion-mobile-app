@@ -1,8 +1,8 @@
-package hr.foi.final_thesis.coderepeat.repository
+package hr.foi.final_thesis.coderepeat.interfaces
 
 import hr.foi.final_thesis.coderepeat.entities.Section
 
-interface SectionRepository {
+interface ISection {
     fun getAllSections(): List<Section>
     fun getSectionById(id: Int): Section?
     fun insertSection(section: Section): Long

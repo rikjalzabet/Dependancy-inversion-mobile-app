@@ -1,9 +1,9 @@
-package hr.foi.final_thesis.coderepeat.repository
+package hr.foi.final_thesis.coderepeat.interfaces
 
 
 import hr.foi.final_thesis.coderepeat.entities.Streak
 
-interface StreakRepository {
+interface IStreak {
     fun getCurrentStreak(id: Int): Streak?
     fun getAllStreaks(): List<Streak>
     fun insertStreak(streak: Streak)
