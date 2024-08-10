@@ -1,17 +1,22 @@
 package hr.foi.final_thesis.coderepeat.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import hr.foi.final_thesis.coderepeat.R
+import hr.foi.final_thesis.coderepeat.activities.LevelActivity
 import hr.foi.final_thesis.coderepeat.adapters.SectionAdapter
 import hr.foi.final_thesis.coderepeat.database.AppDatabase
+import hr.foi.final_thesis.coderepeat.database.Level_TaskDAO
 import hr.foi.final_thesis.coderepeat.database.SectionDAO
+import hr.foi.final_thesis.coderepeat.database.Section_LevelDAO
 import hr.foi.final_thesis.coderepeat.interfaces.ILevel
 import hr.foi.final_thesis.coderepeat.interfaces.ILevel_Task
 import hr.foi.final_thesis.coderepeat.interfaces.ISection
@@ -29,9 +34,11 @@ import kotlinx.coroutines.withContext
 import populateData
 
 class ListSectionFragment : Fragment() {
-    private lateinit var recyclerView: RecyclerView
     private lateinit var sectionDao: SectionDAO
-
+    private lateinit var sectionLevelDao: Section_LevelDAO
+    private lateinit var levelTaskDao: Level_TaskDAO
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,20 +47,28 @@ class ListSectionFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         recyclerView = view.findViewById(R.id.fragment_list_section_rv_listOfSections)
+        progressBar= view.findViewById(R.id.fragment_list_section_pb_loading)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         val db = AppDatabase.getDatabase(requireContext())
         sectionDao = db.sectionDao()
+        sectionLevelDao = db.section_levelDao()
+        levelTaskDao = db.level_taskDao()
+
+        progressBar.visibility=View.VISIBLE
 
         CoroutineScope(Dispatchers.IO).launch {
             val sections = sectionDao.getAllSections()
-            Log.i("ListSectionFragment", "Sections: ${db.section_levelDao()}")
-
-            val sectionAdapter = SectionAdapter(sections, db.section_levelDao())
-            recyclerView.adapter = sectionAdapter
+            withContext(Dispatchers.Main) {
+                progressBar.visibility=View.GONE
+                var adapter = SectionAdapter(sections, sectionLevelDao, levelTaskDao) { level ->
+                    var intent = Intent(context, LevelActivity::class.java)
+                    intent.putExtra("LEVEL_ID", level.id)
+                    startActivity(intent)
+                }
+                recyclerView.adapter = adapter
+            }
         }
     }
-
 }

@@ -19,9 +19,12 @@ fun populateData(context: Context) {
 fun populateSection(context: Context) {
     val db = AppDatabase.getDatabase(context)
     val sections = listOf(
-        Section(title = "Section 1"),
-        Section(title = "Section 2"),
-        Section(title = "New Section") // New section
+        Section(title = "Beginner 1"),
+        Section(title = "Beginner 2"),
+        Section(title = "Intermediate 1"),
+        Section(title = "Intermediate 2"),
+        Section(title = "Advanced 1"),
+        Section(title = "Advanced 2")
     )
     sections.forEach { db.sectionDao().insertSection(it) }
 }
@@ -30,9 +33,9 @@ fun populateLevel(context: Context) {
     val db = AppDatabase.getDatabase(context)
     val sections = db.sectionDao().getAllSections()
     val levels = listOf(
-        Level(name = "Level 1", description = "Basic tasks"),
-        Level(name = "Level 2", description = "Intermediate tasks"),
-        Level(name = "New Level", description = "New tasks") // New level
+        Level(name = "Basics 1", description = "Basic tasks"),
+        Level(name = "Basic 2", description = "Intermediate tasks"),
+        Level(name = "Nice 1", description = "New tasks") // New level
     )
     levels.forEach { db.levelDao().insertLevel(it) }
 }
@@ -55,8 +58,17 @@ fun populateSection_Level(context: Context) {
     val levels = db.levelDao().getAllLevels()
     val section_levels = listOf(
         Section_Level(sectionId = sections[0].id, levelId = levels[0].id),
+        Section_Level(sectionId = sections[0].id, levelId = levels[1].id),
+        Section_Level(sectionId = sections[1].id, levelId = levels[0].id),
         Section_Level(sectionId = sections[1].id, levelId = levels[1].id),
-        Section_Level(sectionId = sections[2].id, levelId = levels[2].id) // New section_level
+        Section_Level(sectionId = sections[2].id, levelId = levels[0].id),
+        Section_Level(sectionId = sections[2].id, levelId = levels[1].id),
+        Section_Level(sectionId = sections[3].id, levelId = levels[0].id),
+        Section_Level(sectionId = sections[4].id, levelId = levels[0].id),
+        Section_Level(sectionId = sections[5].id, levelId = levels[0].id),
+        Section_Level(sectionId = sections[5].id, levelId = levels[1].id),
+        Section_Level(sectionId = sections[5].id, levelId = levels[2].id),
+        Section_Level(sectionId = sections[3].id, levelId = levels[2].id)
     )
     section_levels.forEach { db.section_levelDao().insertSection_Level(it) }
 }

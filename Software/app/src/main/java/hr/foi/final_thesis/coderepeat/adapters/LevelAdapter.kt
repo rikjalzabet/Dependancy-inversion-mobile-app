@@ -1,25 +1,33 @@
 package hr.foi.final_thesis.coderepeat.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import hr.foi.final_thesis.coderepeat.R
+import hr.foi.final_thesis.coderepeat.database.Level_TaskDAO
 import hr.foi.final_thesis.coderepeat.entities.Level
-import hr.foi.final_thesis.coderepeat.entities.Section
 
 
-class LevelAdapter{}
-    /*(private val levels: List<Level>) : RecyclerView.Adapter<LevelAdapter.LevelViewHolder>() {
+class LevelAdapter(
+    private val levels: List<Level>,
+    private val levelTaskDao: Level_TaskDAO,
+    private val onLevelClick: (Level) -> Unit
+) : RecyclerView.Adapter<LevelAdapter.LevelViewHolder>() {
     inner class LevelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val levelNumber = itemView.findViewById<TextView>(R.id.level_list_item_tv_level_number)
-        private val levelName = itemView.findViewById<TextView>(R.id.level_list_item_tv_level_name)
+        internal val levelNumber = itemView.findViewById<TextView>(R.id.level_list_item_tv_level_number)
+        internal val levelName = itemView.findViewById<TextView>(R.id.level_list_item_tv_level_name)
 
-        fun bind(level: Level) {
-            levelNumber.text = level.id.toString()
-            levelName.text = level.name
+        init {
+            itemView.setOnClickListener {
+                val position=adapterPosition
+                if(position!= RecyclerView.NO_POSITION){
+                    val level=levels[position]
+                    onLevelClick(level)
+                }
+            }
         }
     }
 
@@ -31,11 +39,12 @@ class LevelAdapter{}
         }
 
         override fun onBindViewHolder(holder: LevelViewHolder, position: Int) {
-            holder.bind(levels[position])
-
-
+            val level=levels[position]
+            val lvlNmbCounter=position+1
+            holder.levelName.text=level.name
+            holder.levelNumber.text="Level $lvlNmbCounter"
         }
 
         override fun getItemCount(): Int = levels.size
 }
-*/
+
