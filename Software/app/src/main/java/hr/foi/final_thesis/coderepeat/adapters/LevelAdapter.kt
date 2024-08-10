@@ -1,9 +1,11 @@
 package hr.foi.final_thesis.coderepeat.adapters
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hr.foi.final_thesis.coderepeat.R
@@ -19,14 +21,26 @@ class LevelAdapter(
     inner class LevelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         internal val levelNumber = itemView.findViewById<TextView>(R.id.level_list_item_tv_level_number)
         internal val levelName = itemView.findViewById<TextView>(R.id.level_list_item_tv_level_name)
+        internal val levelLayout = itemView.findViewById<LinearLayout>(R.id.level_list_item_ll_level_info)
 
         init {
             itemView.setOnClickListener {
-                val position=adapterPosition
+                /*val position=adapterPosition
                 if(position!= RecyclerView.NO_POSITION){
                     val level=levels[position]
                     onLevelClick(level)
-                }
+                }*/
+                val level = levels[adapterPosition]
+                Log.i("LevelAdapter", "Level clicked: ${level.name}")
+                onLevelClick(level)
+                Log.i("LevelAdapter", "you made a click on item!")
+            }
+
+            levelLayout.setOnClickListener {
+                val level = levels[adapterPosition]
+                Log.i("LevelAdapter", "Layout Level clicked: ${level.name}")
+                onLevelClick(level)
+                Log.i("LevelAdapter", "Layout you made a click on item!")
             }
         }
     }
@@ -43,6 +57,10 @@ class LevelAdapter(
             val lvlNmbCounter=position+1
             holder.levelName.text=level.name
             holder.levelNumber.text="Level $lvlNmbCounter"
+
+            holder.itemView.setOnClickListener {
+                Log.i("LevelAdapter","Clicked Item directly ${level.name}")
+            }
         }
 
         override fun getItemCount(): Int = levels.size

@@ -56,14 +56,14 @@ class ListSectionFragment : Fragment() {
         sectionLevelDao = db.section_levelDao()
         levelTaskDao = db.level_taskDao()
 
-        progressBar.visibility=View.VISIBLE
 
         CoroutineScope(Dispatchers.IO).launch {
             val sections = sectionDao.getAllSections()
+            Log.i("ListSectionFragment", "Fetched Sections: $sections")
             withContext(Dispatchers.Main) {
-                progressBar.visibility=View.GONE
-                var adapter = SectionAdapter(sections, sectionLevelDao, levelTaskDao) { level ->
-                    var intent = Intent(context, LevelActivity::class.java)
+                val adapter = SectionAdapter(sections, sectionLevelDao, levelTaskDao) { level ->
+                    Log.i("ListSectionFragment", "Clicked level: ${level.id} and ${level.name}")
+                    val intent = Intent(context, LevelActivity::class.java)
                     intent.putExtra("LEVEL_ID", level.id)
                     startActivity(intent)
                 }
