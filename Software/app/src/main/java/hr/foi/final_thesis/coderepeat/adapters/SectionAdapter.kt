@@ -15,6 +15,8 @@ import hr.foi.final_thesis.coderepeat.database.Section_LevelDAO
 import hr.foi.final_thesis.coderepeat.entities.Level
 import hr.foi.final_thesis.coderepeat.entities.Section
 import hr.foi.final_thesis.coderepeat.interfaces.ILevel
+import hr.foi.final_thesis.coderepeat.interfaces.ILevel_Task
+import hr.foi.final_thesis.coderepeat.interfaces.ISection_Level
 import hr.foi.final_thesis.coderepeat.interfaces.implementation.Section_Level_Intf_Impl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,8 +25,8 @@ import kotlinx.coroutines.withContext
 
 class SectionAdapter(
     private val sections: List<Section>,
-    private val sectionLevelDao: Section_LevelDAO,
-    private val levelTaskDao: Level_TaskDAO,
+    private val sectionLevel: ISection_Level,
+    private val levelTask: ILevel_Task,
     private val onLevelClick: (Level) -> Unit
 ) : RecyclerView.Adapter<SectionAdapter.SectionViewHolder>() {
     inner class SectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -46,13 +48,13 @@ class SectionAdapter(
 
 
         CoroutineScope(Dispatchers.IO).launch {
-            val levels = sectionLevelDao.getLevelsForSection(section.id)
+            val levels = sectionLevel.getLevelsForSection(section.id)
             Log.i("SectionAdapter", "SectionLevel: $levels")
             Log.i("SectionAdapter", "All the section list:: $sections")
             Log.i("SectionAdapter", "Item counter: ${getItemCount()}")
 
             withContext(Dispatchers.Main) {
-                val levelAdapter=LevelAdapter(levels,levelTaskDao,onLevelClick)
+                val levelAdapter=LevelAdapter(levels,levelTask,onLevelClick)
                 holder.levelRecycleView.adapter=levelAdapter
             }
         }

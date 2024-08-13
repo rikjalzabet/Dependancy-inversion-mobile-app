@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import hr.foi.final_thesis.coderepeat.R
 import hr.foi.final_thesis.coderepeat.database.Level_TaskDAO
 import hr.foi.final_thesis.coderepeat.entities.Level
+import hr.foi.final_thesis.coderepeat.interfaces.ILevel_Task
 
 
 class LevelAdapter(
     private val levels: List<Level>,
-    private val levelTaskDao: Level_TaskDAO,
+    private val levelTask: ILevel_Task,
     private val onLevelClick: (Level) -> Unit
 ) : RecyclerView.Adapter<LevelAdapter.LevelViewHolder>() {
     inner class LevelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

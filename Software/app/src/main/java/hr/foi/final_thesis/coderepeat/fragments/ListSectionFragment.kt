@@ -34,9 +34,10 @@ import kotlinx.coroutines.withContext
 import populateData
 
 class ListSectionFragment : Fragment() {
-    private lateinit var sectionDao: SectionDAO
-    private lateinit var sectionLevelDao: Section_LevelDAO
-    private lateinit var levelTaskDao: Level_TaskDAO
+    //private lateinit var sectionDao: SectionDAO
+    private lateinit var section: ISection
+    private lateinit var sectionLevel: ISection_Level
+    private lateinit var levelTask: ILevel_Task
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     override fun onCreateView(
@@ -52,16 +53,19 @@ class ListSectionFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         val db = AppDatabase.getDatabase(requireContext())
-        sectionDao = db.sectionDao()
-        sectionLevelDao = db.section_levelDao()
-        levelTaskDao = db.level_taskDao()
+        //sectionDao = db.sectionDao()
+        section = Section_Intf_Impl(requireContext())
+        sectionLevel = Section_Level_Intf_Impl(requireContext())
+        //sectionLevel = db.section_levelDao()
+        levelTask= Level_Task_Intf_Impl(requireContext())
+        //levelTask = db.level_taskDao()
 
 
         CoroutineScope(Dispatchers.IO).launch {
-            val sections = sectionDao.getAllSections()
+            val sections = section.getAllSections()
             Log.i("ListSectionFragment", "Fetched Sections: $sections")
             withContext(Dispatchers.Main) {
-                val adapter = SectionAdapter(sections, sectionLevelDao, levelTaskDao) { level ->
+                val adapter = SectionAdapter(sections, sectionLevel, levelTask) { level ->
                     Log.i("ListSectionFragment", "Clicked level: ${level.id} and ${level.name}")
                     val intent = Intent(context, LevelActivity::class.java)
                     intent.putExtra("LEVEL_ID", level.id)
