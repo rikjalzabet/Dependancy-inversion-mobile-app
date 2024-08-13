@@ -9,15 +9,6 @@ class AppNavigation_Intf_Impl(
 ):AppNavigation {
     override fun navigateToHome() {
         val fragment=fragmentList[0]
-        activity
-            .supportFragmentManager
-            .beginTransaction()
-            .replace(hr.foi.final_thesis.coderepeat.R.id.activity_main_FL_main_container, fragment)
-            .commit()
-    }
-
-    override fun navigateToTest() {
-        val fragment=fragmentList[1]
         activityCall(fragment)
     }
 
