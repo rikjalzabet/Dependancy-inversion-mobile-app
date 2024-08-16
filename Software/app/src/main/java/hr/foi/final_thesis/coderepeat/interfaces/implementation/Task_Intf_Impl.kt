@@ -14,6 +14,11 @@ class Task_Intf_Impl(private val context: Context): ITask {
     override fun getTaskById(taskId: Int): Task? {
         return db.taskDao().getTaskById(taskId)
     }
+
+    override fun getTasksByType(type: String): List<Task> {
+        return db.taskDao().getTasksByType(type)
+    }
+
     override fun insertTask(task: Task): Long {
         return db.taskDao().insertTask(task)
     }

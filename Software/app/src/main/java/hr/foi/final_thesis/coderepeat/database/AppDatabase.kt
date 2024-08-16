@@ -22,7 +22,7 @@ import hr.foi.final_thesis.coderepeat.entities.UserAnswer
         Section_Level::class,
         Task_UserAnswer::class,
         UserAnswer::class
-    ], 
+    ],
     version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun sectionDao(): SectionDAO
@@ -31,8 +31,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun level_taskDao(): Level_TaskDAO
     abstract fun streakDao(): StreakDAO
     abstract fun section_levelDao(): Section_LevelDAO
-    abstract fun task_userAnswer(): Task_UserAnswerDAO
-    abstract fun userAnswer(): UserAnswerDAO
+    abstract fun task_userAnswerDao(): Task_UserAnswerDAO
+    abstract fun userAnswerDao(): UserAnswerDAO
 
     companion object{
         @Volatile

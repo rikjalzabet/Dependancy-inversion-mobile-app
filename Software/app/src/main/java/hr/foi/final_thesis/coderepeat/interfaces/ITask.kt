@@ -5,6 +5,7 @@ import hr.foi.final_thesis.coderepeat.entities.Task
 interface ITask {
     fun getAllTasks(): List<Task>
     fun getTaskById(taskId: Int): Task?
+    fun getTasksByType(type: String): List<Task>
     fun insertTask(task: Task): Long
     fun updateTask(task: Task)
     fun deleteTask(task: Task)

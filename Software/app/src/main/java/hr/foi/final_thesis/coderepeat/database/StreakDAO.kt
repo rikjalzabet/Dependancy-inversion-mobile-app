@@ -9,8 +9,14 @@ import hr.foi.final_thesis.coderepeat.entities.Streak
 
 @Dao
 interface StreakDAO {
-    @Query("SELECT * FROM Streak WHERE id = :id")
+    @Query("SELECT currentStreak FROM Streak WHERE id = :id")
     fun getCurrentStreak(id: Int): Streak?
+    @Query("SELECT startDate FROM Streak WHERE id = :id")
+    fun getStartStreakById(id: Int): Streak?
+    @Query("SELECT lastActiveDate FROM Streak WHERE id = :id")
+    fun getLastActiveStreakById(id: Int): Streak?
+    @Query("SELECT * FROM Streak WHERE id = :id")
+    fun getStreakById(id: Int): Streak?
     @Query("SELECT * FROM Streak")
     fun getAllStreaks(): List<Streak>
     @Insert

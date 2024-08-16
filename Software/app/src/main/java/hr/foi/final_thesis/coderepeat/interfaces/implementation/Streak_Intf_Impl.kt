@@ -11,6 +11,18 @@ class Streak_Intf_Impl(private val context: Context): IStreak {
         return db.streakDao().getCurrentStreak(id)
     }
 
+    override fun getStartStreakById(id: Int): Streak? {
+        return db.streakDao().getStartStreakById(id)
+    }
+
+    override fun getLastActiveStreakById(id: Int): Streak? {
+        return db.streakDao().getLastActiveStreakById(id)
+    }
+
+    override fun getStreakById(id: Int): Streak? {
+        return db.streakDao().getStreakById(id)
+    }
+
     override fun getAllStreaks(): List<Streak> {
         return db.streakDao().getAllStreaks()
     }

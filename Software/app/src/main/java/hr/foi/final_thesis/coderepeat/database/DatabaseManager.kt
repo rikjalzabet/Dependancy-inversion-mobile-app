@@ -23,6 +23,9 @@ object DatabaseManager {
             val sectionDao = db.sectionDao()
             val levelTaskDao = db.level_taskDao()
             val sectionLevelDao = db.section_levelDao()
+            val streakDao = db.streakDao()
+            val taskUserAnswerDao = db.task_userAnswer()
+            val userAnswerDao = db.userAnswer()
 
             val levels = levelDao.getAllLevels()
             val tasks = taskDao.getAllTasks()

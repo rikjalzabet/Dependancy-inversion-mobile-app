@@ -17,6 +17,8 @@ interface Level_TaskDAO {
     fun getLevelsForTask(taskId: Int): List<Level>
     @Query("SELECT * FROM Level_Task")
     fun getAllLevel_Tasks(): List<Level_Task>
+    @Query("SELECT points FROM Level_Task WHERE levelId = :levelId AND taskId = :taskId")
+    fun getPointsForLevelTask(levelId: Int, taskId: Int): Double
     @Insert
     fun insertLevel_Task(level_task: Level_Task): Long
     @Update

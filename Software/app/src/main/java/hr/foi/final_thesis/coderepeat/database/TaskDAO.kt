@@ -13,6 +13,8 @@ interface TaskDAO {
     fun getAllTasks(): List<Task>
     @Query("SELECT * FROM Task WHERE id = :id")
     fun getTaskById(id: Int): Task?
+    @Query("SELECT * FROM Task WHERE type = :type")
+    fun getTasksByType(type: String): List<Task>
     @Insert
     fun insertTask(task: Task): Long
     @Update
