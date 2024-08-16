@@ -7,15 +7,15 @@ import hr.foi.final_thesis.coderepeat.interfaces.IStreak
 
 class Streak_Intf_Impl(private val context: Context): IStreak {
     private val db = AppDatabase.getDatabase(context)
-    override fun getCurrentStreak(id: Int): Streak? {
+    override fun getCurrentStreak(id: Int): Int? {
         return db.streakDao().getCurrentStreak(id)
     }
 
-    override fun getStartStreakById(id: Int): Streak? {
+    override fun getStartStreakById(id: Int): String? {
         return db.streakDao().getStartStreakById(id)
     }
 
-    override fun getLastActiveStreakById(id: Int): Streak? {
+    override fun getLastActiveStreakById(id: Int): String? {
         return db.streakDao().getLastActiveStreakById(id)
     }
 

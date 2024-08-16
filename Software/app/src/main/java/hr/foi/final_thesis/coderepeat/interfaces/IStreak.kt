@@ -4,9 +4,9 @@ package hr.foi.final_thesis.coderepeat.interfaces
 import hr.foi.final_thesis.coderepeat.entities.Streak
 
 interface IStreak {
-    fun getCurrentStreak(id: Int): Streak?
-    fun getStartStreakById(id: Int): Streak?
-    fun getLastActiveStreakById(id: Int): Streak?
+    fun getCurrentStreak(id: Int): Int?
+    fun getStartStreakById(id: Int): String?
+    fun getLastActiveStreakById(id: Int): String?
     fun getStreakById(id: Int): Streak?
 
     fun getAllStreaks(): List<Streak>
