@@ -9,5 +9,6 @@ data class Task (
     val type: String,
     val question: String,
     val correctAnswer: String,
-    val options: String? = null
+    val options: String? = null,
+    val isAnswerCorrect: Boolean = false
 )

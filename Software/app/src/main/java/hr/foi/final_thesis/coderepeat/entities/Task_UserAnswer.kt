@@ -2,28 +2,26 @@ package hr.foi.final_thesis.coderepeat.entities
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.ForeignKey.CASCADE
 
 @Entity(
-    tableName = "Level_Task",
-    primaryKeys = ["levelId", "taskId"],
+    tableName = "Task_UserAnswer",
+    primaryKeys = ["answerId", "taskId"],
     foreignKeys = [
         ForeignKey(
-            entity = Level::class,
+            entity = UserAnswer::class,
             parentColumns = ["id"],
-            childColumns = ["levelId"],
-            onDelete = CASCADE
+            childColumns = ["answerId"],
+            onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = Task::class,
             parentColumns = ["id"],
             childColumns = ["taskId"],
-            onDelete = CASCADE
+            onDelete = ForeignKey.CASCADE
         )
     ]
 )
-data class Level_Task(
-    val levelId: Int,
-    val taskId: Int,
-    val points: Double
+data class Task_UserAnswer(
+    val answerId: Int,
+    val taskId: Int
 )
