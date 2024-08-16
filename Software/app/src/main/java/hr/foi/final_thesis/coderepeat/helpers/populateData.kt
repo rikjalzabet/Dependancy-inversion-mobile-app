@@ -6,8 +6,10 @@ import hr.foi.final_thesis.coderepeat.entities.Section
 import hr.foi.final_thesis.coderepeat.entities.Section_Level
 import hr.foi.final_thesis.coderepeat.entities.Streak
 import hr.foi.final_thesis.coderepeat.entities.Task
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-fun populateData(context: Context) {
+suspend fun populateData(context: Context) {
     populateSection(context)
     populateLevel(context)
     populateTask(context)
@@ -16,7 +18,7 @@ fun populateData(context: Context) {
     populateStreak(context)
 }
 
-fun populateSection(context: Context) {
+suspend fun populateSection(context: Context) = withContext(Dispatchers.IO) {
     val db = AppDatabase.getDatabase(context)
     val sections = listOf(
         Section(title = "Beginner 1"),
@@ -29,7 +31,7 @@ fun populateSection(context: Context) {
     sections.forEach { db.sectionDao().insertSection(it) }
 }
 
-fun populateLevel(context: Context) {
+suspend fun populateLevel(context: Context) = withContext(Dispatchers.IO) {
     val db = AppDatabase.getDatabase(context)
     val sections = db.sectionDao().getAllSections()
     val levels = listOf(
@@ -40,7 +42,7 @@ fun populateLevel(context: Context) {
     levels.forEach { db.levelDao().insertLevel(it) }
 }
 
-fun populateTask(context: Context) {
+suspend fun populateTask(context: Context) = withContext(Dispatchers.IO){
     val db = AppDatabase.getDatabase(context)
     val tasks = listOf(
         Task(type = "single_choice", question = "What is 2 + 2?", correctAnswer = "4", options = "2,3,4,5"),
@@ -52,7 +54,7 @@ fun populateTask(context: Context) {
     tasks.forEach { db.taskDao().insertTask(it) }
 }
 
-fun populateSection_Level(context: Context) {
+suspend fun populateSection_Level(context: Context) = withContext(Dispatchers.IO){
     val db = AppDatabase.getDatabase(context)
     val sections = db.sectionDao().getAllSections()
     val levels = db.levelDao().getAllLevels()
@@ -73,22 +75,22 @@ fun populateSection_Level(context: Context) {
     section_levels.forEach { db.section_levelDao().insertSection_Level(it) }
 }
 
-fun populateLevel_Task(context: Context) {
+suspend fun populateLevel_Task(context: Context) = withContext(Dispatchers.IO){
     val db = AppDatabase.getDatabase(context)
     val levels = db.levelDao().getAllLevels()
     val tasks = db.taskDao().getAllTasks()
     val level_tasks = listOf(
-        Level_Task(levelId = levels[0].id, taskId = tasks[0].id),
-        Level_Task(levelId = levels[0].id, taskId = tasks[1].id),
-        Level_Task(levelId = levels[0].id, taskId = tasks[2].id),
-        Level_Task(levelId = levels[1].id, taskId = tasks[3].id),
-        Level_Task(levelId = levels[2].id, taskId = tasks[4].id) // New level_task
+        Level_Task(levelId = levels[0].id, taskId = tasks[0].id, points = 0.0),
+        Level_Task(levelId = levels[0].id, taskId = tasks[1].id, points = 0.0),
+        Level_Task(levelId = levels[0].id, taskId = tasks[2].id, points = 0.0),
+        Level_Task(levelId = levels[1].id, taskId = tasks[3].id, points = 0.0),
+        Level_Task(levelId = levels[2].id, taskId = tasks[4].id, points = 0.0) // New level_task
     )
     level_tasks.forEach { db.level_taskDao().insertLevel_Task(it) }
 }
 
-fun populateStreak(context: Context) {
+suspend fun populateStreak(context: Context) = withContext(Dispatchers.IO){
     val db = AppDatabase.getDatabase(context)
-    val streak = Streak(currentStreak = 0, lastActiveDate = "")
+    val streak = Streak(currentStreak = 0, startDate = "", lastActiveDate = "")
     db.streakDao().insertStreak(streak)
 }
