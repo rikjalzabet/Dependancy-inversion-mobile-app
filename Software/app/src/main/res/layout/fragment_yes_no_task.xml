@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.tasks.YesNoTaskFragment"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+        <TextView
+            android:id="@+id/fragment_yes_no_task_TV_Question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Is this statement true?"
+            android:textSize="18sp"
+            android:layout_gravity="center" />
+
+        <RadioGroup
+            android:id="@+id/fragment_yes_no_task_RG_TrueFalseGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp">
+
+            <RadioButton
+                android:id="@+id/fragment_yes_no_task_RB_True"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="True" />
+
+            <RadioButton
+                android:id="@+id/fragment_yes_no_task_RB_False"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="False"
+                android:layout_marginStart="32dp"/>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/fragment_yes_no_task_BTN_Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"/>
+</LinearLayout>
