@@ -6,21 +6,22 @@
     tools:context=".fragments.tasks.MultipleChoiceTaskFragment"
     android:orientation="vertical"
     android:padding="16dp">
+
         <TextView
             android:id="@+id/fragment_multiple_choice_task_TV_Question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="What is the correct answer?"
+            android:text="Question?"
             android:textSize="18sp"
             android:layout_gravity="center"/>
 
-        <RadioGroup
-            android:id="@+id/fragment_multiple_choice_task_RG_Options"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/fragment_multiple_choice_task_LN_Checkboxes"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="24dp">
-        </RadioGroup>
+            android:orientation="vertical">
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/fragment_multiple_choice_task_BTN_Next"

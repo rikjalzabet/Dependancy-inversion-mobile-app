@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:text="Fill in the blank:"
             android:textSize="18sp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"/>
 
         <EditText
             android:id="@+id/fragment_fill_the_blank_task_ET_UserAnswer"

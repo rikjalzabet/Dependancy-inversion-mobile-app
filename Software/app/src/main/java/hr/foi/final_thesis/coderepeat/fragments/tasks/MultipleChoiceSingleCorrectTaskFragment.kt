@@ -7,14 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import hr.foi.final_thesis.coderepeat.R
 
-class CodeCompletionTaskFragment : Fragment() {
+
+class MultipleChoiceSingleCorrectTaskFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_code_completion_task, container, false)
+        return inflater.inflate(
+            R.layout.fragment_multiple_choice_single_correct_task,
+            container,
+            false
+        )
     }
 
 }
