@@ -16,7 +16,7 @@
             android:layout_gravity="center"/>
 
         <LinearLayout
-            android:id="@+id/fragment_multiple_choice_task_LN_Checkboxes"
+            android:id="@+id/fragment_multiple_choice_task_LL_Checkboxes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

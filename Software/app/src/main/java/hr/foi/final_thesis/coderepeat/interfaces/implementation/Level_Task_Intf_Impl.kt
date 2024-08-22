@@ -21,6 +21,11 @@ class Level_Task_Intf_Impl (private val context: Context) : ILevel_Task {
     override fun getPointsForLevelTask(levelId: Int, taskId: Int): Double {
         return db.level_taskDao().getPointsForLevelTask(levelId, taskId)
     }
+
+    override fun getTaskByLevelIdAndTaskType(levelId: Int, type: String): Task {
+        return db.level_taskDao().getTaskByLevelIdAndTaskType(levelId, type)
+    }
+
     override fun insertLevel_Task(level_task: Level_Task) {
         db.level_taskDao().insertLevel_Task(level_task)
     }

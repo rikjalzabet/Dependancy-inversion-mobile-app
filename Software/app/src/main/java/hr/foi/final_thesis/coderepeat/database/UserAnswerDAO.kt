@@ -15,6 +15,8 @@ interface UserAnswerDAO {
     fun getUserAnswerById(id: Int): UserAnswer?
     @Insert
     fun insertUserAnswers(userAnswer: UserAnswer): Long
+    @Query("SELECT * FROM UserAnswers ORDER BY id DESC LIMIT 1")
+    fun getLatestInsertedUserAnswer(): UserAnswer
     @Update
     fun updateUserAnswers(userAnswer: UserAnswer)
     @Delete

@@ -18,6 +18,11 @@ class Task_UserAnswer_intf_impl(private val context: Context):ITask_UserAnswer {
     override fun getAllTask_UserAnswers(): List<Task_UserAnswer> {
         return db.task_userAnswerDao().getAllTask_UserAnswers()
     }
+
+    override fun getUserAnswerForTask(taskId: Int): List<UserAnswer> {
+        return db.task_userAnswerDao().getUserAnswerForTask(taskId)
+    }
+
     override fun insertTask_UserAnswer(task_userAnswer: Task_UserAnswer): Long {
         return db.task_userAnswerDao().insertTask_UserAnswer(task_userAnswer)
     }

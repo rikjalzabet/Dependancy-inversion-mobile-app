@@ -45,11 +45,11 @@ suspend fun populateLevel(context: Context) = withContext(Dispatchers.IO) {
 suspend fun populateTask(context: Context) = withContext(Dispatchers.IO){
     val db = AppDatabase.getDatabase(context)
     val tasks = listOf(
-        Task(type = "single_choice", question = "What is 2 + 2?", correctAnswer = "4", options = "2,3,4,5"),
-        Task(type = "multiple_choice", question = "Select all numbers types.", correctAnswer = "Int, Double", options = "String, Int, Double, Char"),
-        Task(type = "fill_blank", question = "Int is what type?", correctAnswer = "number"),
-        Task(type = "code", question = "what operator is used for or in the code: if(a==null __ b==null){ print('a or b are null')}", correctAnswer = "||"),
-        Task(type = "new_type", question = "New question", correctAnswer = "New answer") // New task
+        Task(type = "YES_NO", question = "What is 2 + 2?", correctAnswer = "4", options = "2,3,4,5"),
+        Task(type = "YES_NO", question = "Select all numbers types.", correctAnswer = "Int, Double", options = "String, Int, Double, Char"),
+        Task(type = "YES_NO", question = "Int is what type?", correctAnswer = "number"),
+        Task(type = "YES_NO", question = "what operator is used for or in the code: if(a==null __ b==null){ print('a or b are null')}", correctAnswer = "||"),
+        Task(type = "YES_NO", question = "Is INT number type?", correctAnswer = "Yes", options = "Yes, No") // New task
     )
     tasks.forEach { db.taskDao().insertTask(it) }
 }

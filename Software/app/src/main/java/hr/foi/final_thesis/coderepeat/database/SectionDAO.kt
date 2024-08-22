@@ -13,7 +13,7 @@ interface SectionDAO {
     @Query("SELECT * FROM Section")
     fun getAllSections(): List<Section>
     @Query("SELECT * FROM Section WHERE id = :id")
-    fun getSectionById(id: Int): Section
+    fun getSectionById(id: Int): Section?
     @Insert
     fun insertSection(section: Section): Long
     @Update

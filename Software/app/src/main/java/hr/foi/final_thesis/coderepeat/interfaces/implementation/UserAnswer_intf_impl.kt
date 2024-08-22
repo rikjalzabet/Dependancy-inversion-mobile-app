@@ -13,6 +13,11 @@ class UserAnswer_intf_impl(private val context: Context): IUserAnswer{
     override fun getUserAnswerById(id: Int): UserAnswer? {
         return db.userAnswerDao().getUserAnswerById(id)
     }
+
+    override fun getLatestInsertedUserAnswer(): UserAnswer {
+        return db.userAnswerDao().getLatestInsertedUserAnswer()
+    }
+
     override fun insertUserAnswers(userAnswer: UserAnswer): Long {
         return db.userAnswerDao().insertUserAnswers(userAnswer)
     }
