@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import hr.foi.final_thesis.coderepeat.entities.Level
 import hr.foi.final_thesis.coderepeat.entities.Task
+import hr.foi.final_thesis.coderepeat.entities.UserAnswer
 import hr.foi.final_thesis.coderepeat.helpers.TaskType
 import hr.foi.final_thesis.coderepeat.interfaces.implementation.Level_Intf_Impl
 import hr.foi.final_thesis.coderepeat.interfaces.implementation.Level_Task_Intf_Impl
@@ -45,6 +46,7 @@ interface ITaskHandler{
     fun getTaskQuestionMultiple():List<String>
     fun setUserAnswer(userAnswer: String, taskId: Int, userAnswerId: Int)
     fun getUserAnswer(id: Int): String
+    fun getUserLastAnswer(): UserAnswer
     fun validateUserAnswerWithCorrectAnswer(userAnswerId: Int, taskId: Int):Boolean
     //fun displayTask(view: View)
     //fun saveAnswerToDatabase(answer:String)

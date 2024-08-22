@@ -45,11 +45,11 @@ suspend fun populateLevel(context: Context) = withContext(Dispatchers.IO) {
 suspend fun populateTask(context: Context) = withContext(Dispatchers.IO){
     val db = AppDatabase.getDatabase(context)
     val tasks = listOf(
-        Task(type = "YES_NO", question = "What is 2 + 2?", correctAnswer = "4", options = "2,3,4,5"),
-        Task(type = "YES_NO", question = "Select all numbers types.", correctAnswer = "Int, Double", options = "String, Int, Double, Char"),
-        Task(type = "YES_NO", question = "Int is what type?", correctAnswer = "number"),
+        Task(type = "MULTIPLE_CHOICE", question = "What is 2 + 2?", correctAnswer = "4", options = "2,3,4,5"),
+        Task(type = "MULTIPLE_CHOICE", question = "Select all numbers types.", correctAnswer = "Int, Double", options = "String, Int, Double, Char"),
+        Task(type = "YES_NO", question = "We can do: Int a = false?", correctAnswer = "False"),
         Task(type = "YES_NO", question = "what operator is used for or in the code: if(a==null __ b==null){ print('a or b are null')}", correctAnswer = "||"),
-        Task(type = "YES_NO", question = "Is INT number type?", correctAnswer = "Yes", options = "Yes, No") // New task
+        Task(type = "YES_NO", question = "Is INT number type?", correctAnswer = "True", options = "True, False") // New task
     )
     tasks.forEach { db.taskDao().insertTask(it) }
 }
@@ -83,6 +83,7 @@ suspend fun populateLevel_Task(context: Context) = withContext(Dispatchers.IO){
         Level_Task(levelId = levels[0].id, taskId = tasks[0].id, points = 0.0),
         Level_Task(levelId = levels[0].id, taskId = tasks[1].id, points = 0.0),
         Level_Task(levelId = levels[0].id, taskId = tasks[2].id, points = 0.0),
+        Level_Task(levelId = levels[0].id, taskId = tasks[4].id, points = 0.0),
         Level_Task(levelId = levels[1].id, taskId = tasks[3].id, points = 0.0),
         Level_Task(levelId = levels[2].id, taskId = tasks[4].id, points = 0.0) // New level_task
     )

@@ -1,6 +1,7 @@
 package hr.foi.final_thesis.coderepeat.interfaces.tasks
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
@@ -73,9 +74,14 @@ class YesNoTask(
         return UserAnswerImpl.getUserAnswerById(id)?.userAnswer.toString()
     }
 
+    override fun getUserLastAnswer(): UserAnswer {
+        return UserAnswerImpl.getLatestInsertedUserAnswer()
+    }
+
     override fun validateUserAnswerWithCorrectAnswer(userAnswerId: Int, taskId: Int): Boolean {
         val userAnswer = UserAnswerImpl.getUserAnswerById(userAnswerId)
         val task = TaskImpl.getTaskById(taskId)
-        return userAnswer?.userAnswer?.lowercase().toString() == task?.correctAnswer.toString()
+        Log.i("YesNoTask","User answer: ${userAnswer?.userAnswer} Task answer: ${task?.correctAnswer}")
+        return userAnswer?.userAnswer?.toString() == task?.correctAnswer.toString()
     }
 }
