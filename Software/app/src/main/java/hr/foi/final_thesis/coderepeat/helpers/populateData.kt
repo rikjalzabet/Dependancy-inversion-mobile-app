@@ -47,10 +47,11 @@ suspend fun populateTask(context: Context) = withContext(Dispatchers.IO){
     val tasks = listOf(
         Task(type = "MULTIPLE_CHOICE_SINGLE_ANSWER", question = "What is 2 + 2?", correctAnswer = "4", options = "2 |##| 3 |##| 4 |##| 5"),
         Task(type = "MULTIPLE_CHOICE_SINGLE_ANSWER", question = "What is Double?", correctAnswer = "Decimal number", options = "Number |##| Decimal number |##| String |##| False"),
-        Task(type = "MULTIPLE_CHOICE", question = "Select all numbers types.", correctAnswer = "Int, Double", options = "String, Int, Double, Char"),
+        Task(type = "MULTIPLE_CHOICE_MULTIPLE_ANSWERS", question = "Select all numbers types.", correctAnswer = "Int|##|Double", options = "String |##| Int |##| Double |##| Char"),
+        Task(type = "MULTIPLE_CHOICE_MULTIPLE_ANSWERS", question = "Select all types that you can equal them to 0 and 1.", correctAnswer = "Int|##|Double|##|Bool", options = "Int |##| Double |##| Bool"),
         Task(type = "YES_NO", question = "We can do: Int a = false?", correctAnswer = "False", options = "True, False"),
-        Task(type = "YES_NO", question = "what operator is used for or in the code: if(a==null __ b==null){ print('a or b are null')}", correctAnswer = "||"),
-        Task(type = "YES_NO", question = "Is INT number type?", correctAnswer = "True", options = "True, False") // New task
+        Task(type = "FILL_IN_THE_BLANK", question = "what operator is used for or in the code: if(a==null __ b==null){ print('a or b are null')}", correctAnswer = "||"),
+        Task(type = "YES_NO", question = "Is INT number type?", correctAnswer = "True", options = "True, False")
     )
     tasks.forEach { db.taskDao().insertTask(it) }
 }
@@ -84,10 +85,10 @@ suspend fun populateLevel_Task(context: Context) = withContext(Dispatchers.IO){
         Level_Task(levelId = levels[0].id, taskId = tasks[0].id, points = 0.0),
         Level_Task(levelId = levels[0].id, taskId = tasks[3].id, points = 0.0),
         Level_Task(levelId = levels[0].id, taskId = tasks[1].id, points = 0.0),
-        Level_Task(levelId = levels[0].id, taskId = tasks[5].id, points = 0.0),
-        Level_Task(levelId = levels[1].id, taskId = tasks[4].id, points = 0.0),
+        Level_Task(levelId = levels[1].id, taskId = tasks[2].id, points = 0.0),
+        Level_Task(levelId = levels[1].id, taskId = tasks[5].id, points = 0.0),
         Level_Task(levelId = levels[1].id, taskId = tasks[3].id, points = 0.0),
-        Level_Task(levelId = levels[2].id, taskId = tasks[4].id, points = 0.0) // New level_task
+        Level_Task(levelId = levels[2].id, taskId = tasks[4].id, points = 0.0)
     )
     level_tasks.forEach { db.level_taskDao().insertLevel_Task(it) }
 }
