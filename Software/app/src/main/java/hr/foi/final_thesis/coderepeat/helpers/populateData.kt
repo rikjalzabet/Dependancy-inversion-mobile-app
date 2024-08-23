@@ -37,8 +37,10 @@ suspend fun populateLevel(context: Context) = withContext(Dispatchers.IO) {
     val levels = listOf(
         Level(name = "Basics 1", description = "Basic tasks"),
         Level(name = "Basic 2", description = "Intermediate tasks"),
-        Level(name = "Nice 1", description = "New tasks") // New level
-    )
+        Level(name = "Nice 1", description = "New tasks"),
+        Level(name = "Code", description = "Code fill in tasks")
+
+        )
     levels.forEach { db.levelDao().insertLevel(it) }
 }
 
@@ -51,7 +53,10 @@ suspend fun populateTask(context: Context) = withContext(Dispatchers.IO){
         Task(type = "MULTIPLE_CHOICE_MULTIPLE_ANSWERS", question = "Select all types that you can equal them to 0 and 1.", correctAnswer = "Int|##|Double|##|Bool", options = "Int |##| Double |##| Bool"),
         Task(type = "YES_NO", question = "We can do: Int a = false?", correctAnswer = "False", options = "True, False"),
         Task(type = "FILL_IN_THE_BLANK", question = "what operator is used for or in the code: if(a==null __ b==null){ print('a or b are null')}", correctAnswer = "||"),
-        Task(type = "YES_NO", question = "Is INT number type?", correctAnswer = "True", options = "True, False")
+        Task(type = "YES_NO", question = "Is INT number type?", correctAnswer = "True", options = "True, False"),
+        Task(type = "FILL_IN_THE_BLANK", question = "what operator is used for and in the code: if(a==null __ b==null){ print('a and b are null')}", correctAnswer = "&&"),
+        Task(type = "FILL_IN_THE_BLANK", question = "what operator is used for not equal to in the code: if(a__null){ print('a is not equal to null')}", correctAnswer = "!="),
+
     )
     tasks.forEach { db.taskDao().insertTask(it) }
 }
@@ -63,6 +68,7 @@ suspend fun populateSection_Level(context: Context) = withContext(Dispatchers.IO
     val section_levels = listOf(
         Section_Level(sectionId = sections[0].id, levelId = levels[0].id),
         Section_Level(sectionId = sections[0].id, levelId = levels[1].id),
+        Section_Level(sectionId = sections[0].id, levelId = levels[3].id),
         Section_Level(sectionId = sections[1].id, levelId = levels[0].id),
         Section_Level(sectionId = sections[1].id, levelId = levels[1].id),
         Section_Level(sectionId = sections[2].id, levelId = levels[0].id),
@@ -88,7 +94,10 @@ suspend fun populateLevel_Task(context: Context) = withContext(Dispatchers.IO){
         Level_Task(levelId = levels[1].id, taskId = tasks[2].id, points = 0.0),
         Level_Task(levelId = levels[1].id, taskId = tasks[5].id, points = 0.0),
         Level_Task(levelId = levels[1].id, taskId = tasks[3].id, points = 0.0),
-        Level_Task(levelId = levels[2].id, taskId = tasks[4].id, points = 0.0)
+        Level_Task(levelId = levels[2].id, taskId = tasks[4].id, points = 0.0),
+        Level_Task(levelId = levels[3].id, taskId = tasks[7].id, points = 0.0),
+        Level_Task(levelId = levels[3].id, taskId = tasks[0].id, points = 0.0),
+        Level_Task(levelId = levels[3].id, taskId = tasks[8].id, points = 0.0)
     )
     level_tasks.forEach { db.level_taskDao().insertLevel_Task(it) }
 }

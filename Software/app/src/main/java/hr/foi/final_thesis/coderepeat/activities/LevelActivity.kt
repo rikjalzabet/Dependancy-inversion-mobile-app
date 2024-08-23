@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import hr.foi.final_thesis.coderepeat.R
+import hr.foi.final_thesis.coderepeat.adapters.tasks.FillTheBlankAdapter
 import hr.foi.final_thesis.coderepeat.adapters.tasks.MultipleChoiceAdapter
 import hr.foi.final_thesis.coderepeat.adapters.tasks.MultipleChoiceSingleCorrectAdapter
 import hr.foi.final_thesis.coderepeat.adapters.tasks.YesNoAdapter
@@ -16,6 +17,7 @@ import hr.foi.final_thesis.coderepeat.database.AppDatabase
 import hr.foi.final_thesis.coderepeat.database.LevelDAO
 import hr.foi.final_thesis.coderepeat.database.Level_TaskDAO
 import hr.foi.final_thesis.coderepeat.entities.Task
+import hr.foi.final_thesis.coderepeat.interfaces.tasks.FillTheBlankTask
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.MultipleChoiceSingleChoiceTask
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.MultipleChoiceTask
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.YesNoTask
@@ -30,6 +32,7 @@ class LevelActivity : AppCompatActivity() {
     private lateinit var yesNoTaskAdapter: YesNoAdapter
     private lateinit var multipleChoiceSingleCorrectTaskAdapter: MultipleChoiceSingleCorrectAdapter
     private lateinit var multipleChoiceMultipleCorrectTaskAdapter: MultipleChoiceAdapter
+    private lateinit var fillTheBlankTaskAdapter: FillTheBlankAdapter
 
     private var currentTaskIndex: Int = 0
     private var levelId: Int = 0
@@ -61,6 +64,7 @@ class LevelActivity : AppCompatActivity() {
         yesNoTaskAdapter = YesNoAdapter(YesNoTask(this))
         multipleChoiceSingleCorrectTaskAdapter= MultipleChoiceSingleCorrectAdapter(MultipleChoiceSingleChoiceTask(this))
         multipleChoiceMultipleCorrectTaskAdapter = MultipleChoiceAdapter(MultipleChoiceTask(this))
+        fillTheBlankTaskAdapter = FillTheBlankAdapter(FillTheBlankTask(this))
 
         CoroutineScope(Dispatchers.IO).launch {
             tasks = levelTaskDao.getTasksForLevel(levelId)
@@ -83,6 +87,7 @@ class LevelActivity : AppCompatActivity() {
             "YES_NO" -> yesNoTaskAdapter.createFragment(taskId)
             "MULTIPLE_CHOICE_SINGLE_ANSWER" -> multipleChoiceSingleCorrectTaskAdapter.createFragment(taskId)
             "MULTIPLE_CHOICE_MULTIPLE_ANSWERS" -> multipleChoiceMultipleCorrectTaskAdapter.createFragment(taskId)
+            "FILL_IN_THE_BLANK" -> fillTheBlankTaskAdapter.createFragment(taskId)
             else -> {
                 Log.e("LevelActivity", "Unknown task type: ${task?.type}. Skipping this task.")
                 loadNextTask()
