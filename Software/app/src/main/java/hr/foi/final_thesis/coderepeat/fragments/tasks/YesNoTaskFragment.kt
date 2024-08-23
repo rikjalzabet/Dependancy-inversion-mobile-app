@@ -26,15 +26,6 @@ class YesNoTaskFragment(
     private val taskHandler: ITaskHandler,
     private var taskId: Int
 ) : Fragment() {
-
-    /*
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_yes_no_task, container, false)
-    }*/
-
         private lateinit var questionTextView: TextView
         private lateinit var yesButton: RadioButton
         private lateinit var noButton: RadioButton
@@ -62,13 +53,11 @@ class YesNoTaskFragment(
                     handleNextButtonClick()
                 }
             }
-
             return view
         }
 
         private suspend fun displayTask() {
             CoroutineScope(Dispatchers.IO).launch  {
-
                 val taskQuestion=  taskHandler.getTaskQuestion(taskId)
                 questionTextView.text =taskQuestion
             }
@@ -79,19 +68,21 @@ class YesNoTaskFragment(
                 yesButton.isChecked -> "True"
                 noButton.isChecked -> "False"
                 else -> {
-                    Toast.makeText(context, "Please select an answer", Toast.LENGTH_SHORT).show()
+                    activity?.runOnUiThread {
+                        Toast.makeText(context, "Please select an answer", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                     return
                 }
             }
 
             CoroutineScope(Dispatchers.IO).launch {
-                taskHandler.setUserAnswer(selectedAnswer, taskId, 1) // Save the answer
+                taskHandler.setUserAnswer(selectedAnswer, taskId, 1)
 
-                // Log the results for verification
                 val userAnswer = taskHandler.getUserLastAnswer()
                 val isCorrect = taskHandler.validateUserAnswerWithCorrectAnswer(userAnswer.id, taskId)
-                Log.d("YesNoTaskFragment", "User Answer: ${userAnswer.userAnswer}, ${taskHandler.getTask(taskId)?.question}")
-                Log.d("YesNoTaskFragment", "Is Correct: $isCorrect, ${taskHandler.getTask(taskId)?.question}")
+                Log.d("TaskGameInfo", "YES_NO - User Answer: ${userAnswer.userAnswer}, ${taskHandler.getTask(taskId)?.question}")
+                Log.d("TaskGameInfo", "YES_NO - Is Correct: $isCorrect, ${taskHandler.getTask(taskId)?.question}")
 
                 withContext(Dispatchers.IO) {
                     (activity as LevelActivity).loadNextTask()

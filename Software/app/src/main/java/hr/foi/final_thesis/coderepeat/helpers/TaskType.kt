@@ -2,8 +2,8 @@ package hr.foi.final_thesis.coderepeat.helpers
 
 enum class TaskType {
     FILL_IN_THE_BLANK,
-    SINGLE_CHOICE,
-    MULTIPLE_CHOICE,
+    MULTIPLE_CHOICE_SINGLE_ANSWER,
+    MULTIPLE_CHOICE_MULTIPLE_ANSWERS,
     MATCH_THE_ANSWER,
     YES_NO
 }
