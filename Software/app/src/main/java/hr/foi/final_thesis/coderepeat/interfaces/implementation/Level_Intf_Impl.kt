@@ -7,8 +7,6 @@ import hr.foi.final_thesis.coderepeat.entities.Level
 import hr.foi.final_thesis.coderepeat.interfaces.ILevel
 
 class Level_Intf_Impl(private val levelDao: LevelDAO) : ILevel {
-    //private val db = AppDatabase.getDatabase(context)
-
     override fun getAllLevels(): List<Level> {
         return levelDao.getAllLevels()
     }
