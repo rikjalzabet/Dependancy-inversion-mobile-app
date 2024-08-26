@@ -2,32 +2,23 @@ package hr.foi.final_thesis.coderepeat.interfaces.tasks
 
 import android.content.Context
 import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.RadioButton
-import android.widget.TextView
-import hr.foi.final_thesis.coderepeat.R
-import hr.foi.final_thesis.coderepeat.database.DatabaseManager
 import hr.foi.final_thesis.coderepeat.entities.Level
 import hr.foi.final_thesis.coderepeat.entities.Task
 import hr.foi.final_thesis.coderepeat.entities.Task_UserAnswer
 import hr.foi.final_thesis.coderepeat.entities.UserAnswer
-import hr.foi.final_thesis.coderepeat.helpers.TaskType
-import hr.foi.final_thesis.coderepeat.interfaces.implementation.Level_Intf_Impl
-import hr.foi.final_thesis.coderepeat.interfaces.implementation.Level_Task_Intf_Impl
-import hr.foi.final_thesis.coderepeat.interfaces.implementation.Section_Intf_Impl
-import hr.foi.final_thesis.coderepeat.interfaces.implementation.Section_Level_Intf_Impl
-import hr.foi.final_thesis.coderepeat.interfaces.implementation.Streak_Intf_Impl
-import hr.foi.final_thesis.coderepeat.interfaces.implementation.Task_Intf_Impl
-import hr.foi.final_thesis.coderepeat.interfaces.implementation.Task_UserAnswer_intf_impl
-import hr.foi.final_thesis.coderepeat.interfaces.implementation.UserAnswer_intf_impl
+import hr.foi.final_thesis.coderepeat.interfaces.ILevel
+import hr.foi.final_thesis.coderepeat.interfaces.ILevel_Task
+import hr.foi.final_thesis.coderepeat.interfaces.ITask
+import hr.foi.final_thesis.coderepeat.interfaces.ITask_UserAnswer
+import hr.foi.final_thesis.coderepeat.interfaces.IUserAnswer
 
 class YesNoTask(
-    private val givenContext: Context
+    private val LevelImpl: ILevel,
+    private val TaskImpl: ITask,
+    private val LevelTaskImpl: ILevel_Task,
+    private val TaskUserAnswerImpl: ITask_UserAnswer,
+    private val UserAnswerImpl: IUserAnswer
 ) : ITaskHandler {
-
-    override var context: Context = givenContext
-
     override fun getLevel(levelId: Int): Level? {
         return LevelImpl.getLevelById(levelId)
     }

@@ -12,11 +12,19 @@ import hr.foi.final_thesis.coderepeat.entities.Task
 import hr.foi.final_thesis.coderepeat.entities.Task_UserAnswer
 import hr.foi.final_thesis.coderepeat.entities.UserAnswer
 import hr.foi.final_thesis.coderepeat.helpers.TaskType
+import hr.foi.final_thesis.coderepeat.interfaces.ILevel
+import hr.foi.final_thesis.coderepeat.interfaces.ILevel_Task
+import hr.foi.final_thesis.coderepeat.interfaces.ITask
+import hr.foi.final_thesis.coderepeat.interfaces.ITask_UserAnswer
+import hr.foi.final_thesis.coderepeat.interfaces.IUserAnswer
 
 class MatchTheAnswersTask(
-    private val givenContext: Context
+    private val LevelImpl: ILevel,
+    private val TaskImpl: ITask,
+    private val LevelTaskImpl: ILevel_Task,
+    private val TaskUserAnswerImpl: ITask_UserAnswer,
+    private val UserAnswerImpl: IUserAnswer
 ): ITaskHandler{
-    override var context: Context = givenContext
     override fun getLevel(levelId: Int): Level? {
         return LevelImpl.getLevelById(levelId)
     }

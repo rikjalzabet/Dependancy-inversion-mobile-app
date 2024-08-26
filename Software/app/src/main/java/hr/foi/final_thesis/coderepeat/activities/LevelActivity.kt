@@ -16,6 +16,11 @@ import hr.foi.final_thesis.coderepeat.database.AppDatabase
 import hr.foi.final_thesis.coderepeat.database.LevelDAO
 import hr.foi.final_thesis.coderepeat.database.Level_TaskDAO
 import hr.foi.final_thesis.coderepeat.entities.Task
+import hr.foi.final_thesis.coderepeat.interfaces.implementation.Level_Intf_Impl
+import hr.foi.final_thesis.coderepeat.interfaces.implementation.Level_Task_Intf_Impl
+import hr.foi.final_thesis.coderepeat.interfaces.implementation.Task_Intf_Impl
+import hr.foi.final_thesis.coderepeat.interfaces.implementation.Task_UserAnswer_intf_impl
+import hr.foi.final_thesis.coderepeat.interfaces.implementation.UserAnswer_intf_impl
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.FillTheBlankTask
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.MatchTheAnswersTask
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.MultipleChoiceSingleChoiceTask
@@ -62,11 +67,41 @@ class LevelActivity : AppCompatActivity() {
             }
         }
 
-        yesNoTaskAdapter = YesNoAdapter(YesNoTask(this))
-        multipleChoiceSingleCorrectTaskAdapter= MultipleChoiceSingleCorrectAdapter(MultipleChoiceSingleChoiceTask(this))
-        multipleChoiceMultipleCorrectTaskAdapter = MultipleChoiceAdapter(MultipleChoiceTask(this))
-        fillTheBlankTaskAdapter = FillTheBlankAdapter(FillTheBlankTask(this))
-        matchTheAnswerTaskAdapter=MatchTheAnswersAdapter(MatchTheAnswersTask(this))
+        yesNoTaskAdapter = YesNoAdapter(YesNoTask(
+            Level_Intf_Impl(this),
+            Task_Intf_Impl(this),
+            Level_Task_Intf_Impl(this),
+            Task_UserAnswer_intf_impl(this),
+            UserAnswer_intf_impl(this)
+        ))
+        multipleChoiceSingleCorrectTaskAdapter = MultipleChoiceSingleCorrectAdapter(MultipleChoiceSingleChoiceTask(
+            Level_Intf_Impl(this),
+            Task_Intf_Impl(this),
+            Level_Task_Intf_Impl(this),
+            Task_UserAnswer_intf_impl(this),
+            UserAnswer_intf_impl(this)
+        ))
+        multipleChoiceMultipleCorrectTaskAdapter = MultipleChoiceAdapter(MultipleChoiceTask(
+            Level_Intf_Impl(this),
+            Task_Intf_Impl(this),
+            Level_Task_Intf_Impl(this),
+            Task_UserAnswer_intf_impl(this),
+            UserAnswer_intf_impl(this)
+        ))
+        fillTheBlankTaskAdapter = FillTheBlankAdapter(FillTheBlankTask(
+            Level_Intf_Impl(this),
+            Task_Intf_Impl(this),
+            Level_Task_Intf_Impl(this),
+            Task_UserAnswer_intf_impl(this),
+            UserAnswer_intf_impl(this)
+        ))
+        matchTheAnswerTaskAdapter = MatchTheAnswersAdapter(MatchTheAnswersTask(
+            Level_Intf_Impl(this),
+            Task_Intf_Impl(this),
+            Level_Task_Intf_Impl(this),
+            Task_UserAnswer_intf_impl(this),
+            UserAnswer_intf_impl(this)
+        ))
 
         CoroutineScope(Dispatchers.IO).launch {
             tasks = levelTaskDao.getTasksForLevel(levelId)

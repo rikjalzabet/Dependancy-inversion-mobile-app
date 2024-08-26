@@ -6,6 +6,14 @@ import hr.foi.final_thesis.coderepeat.entities.Level
 import hr.foi.final_thesis.coderepeat.entities.Task
 import hr.foi.final_thesis.coderepeat.entities.UserAnswer
 import hr.foi.final_thesis.coderepeat.helpers.TaskType
+import hr.foi.final_thesis.coderepeat.interfaces.ILevel
+import hr.foi.final_thesis.coderepeat.interfaces.ILevel_Task
+import hr.foi.final_thesis.coderepeat.interfaces.ISection
+import hr.foi.final_thesis.coderepeat.interfaces.ISection_Level
+import hr.foi.final_thesis.coderepeat.interfaces.IStreak
+import hr.foi.final_thesis.coderepeat.interfaces.ITask
+import hr.foi.final_thesis.coderepeat.interfaces.ITask_UserAnswer
+import hr.foi.final_thesis.coderepeat.interfaces.IUserAnswer
 import hr.foi.final_thesis.coderepeat.interfaces.implementation.Level_Intf_Impl
 import hr.foi.final_thesis.coderepeat.interfaces.implementation.Level_Task_Intf_Impl
 import hr.foi.final_thesis.coderepeat.interfaces.implementation.Section_Intf_Impl
@@ -16,28 +24,9 @@ import hr.foi.final_thesis.coderepeat.interfaces.implementation.Task_UserAnswer_
 import hr.foi.final_thesis.coderepeat.interfaces.implementation.UserAnswer_intf_impl
 
 interface ITaskHandler{
-    var context: Context
-
-    val LevelImpl: Level_Intf_Impl
-        get() = Level_Intf_Impl(context)
-    val LevelTaskImpl: Level_Task_Intf_Impl
-        get() = Level_Task_Intf_Impl(context)
-    val SectionImpl: Section_Intf_Impl
-        get() = Section_Intf_Impl(context)
-    val SectionLevelImpl: Section_Level_Intf_Impl
-        get() = Section_Level_Intf_Impl(context)
-    val StreakImpl: Streak_Intf_Impl
-        get() = Streak_Intf_Impl(context)
-    val TaskImpl: Task_Intf_Impl
-        get() = Task_Intf_Impl(context)
-    val TaskUserAnswerImpl: Task_UserAnswer_intf_impl
-        get() = Task_UserAnswer_intf_impl(context)
-    val UserAnswerImpl: UserAnswer_intf_impl
-        get() = UserAnswer_intf_impl(context)
-
     fun getLevel(levelId: Int): Level?
     fun getTask(taskId: Int): Task?
-    fun getTaskByType(levelId: Int, taskType: String): Task? //add to database this function
+    fun getTaskByType(levelId: Int, taskType: String): Task?
     fun getTaskQuestion(taskId: Int): String
     fun getTaskOptions(taskId: Int): List<String>
     fun getTaskCorrectAnswer(taskId: Int): String
