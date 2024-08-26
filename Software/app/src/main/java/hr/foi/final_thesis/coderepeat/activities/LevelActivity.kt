@@ -130,11 +130,11 @@ class LevelActivity : AppCompatActivity() {
         val task = tasks?.find { it.id == taskId }
 
         val fragment = when (task?.type) {
-            "YES_NO" -> yesNoTaskAdapter.createFragment(taskId)
-            "MULTIPLE_CHOICE_SINGLE_ANSWER" -> multipleChoiceSingleCorrectTaskAdapter.createFragment(taskId)
-            "MULTIPLE_CHOICE_MULTIPLE_ANSWERS" -> multipleChoiceMultipleCorrectTaskAdapter.createFragment(taskId)
-            "FILL_IN_THE_BLANK" -> fillTheBlankTaskAdapter.createFragment(taskId)
-            "MATCH_THE_ANSWERS" -> matchTheAnswerTaskAdapter.createFragment(taskId)
+            "YES_NO" -> yesNoTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size)
+            "MULTIPLE_CHOICE_SINGLE_ANSWER" -> multipleChoiceSingleCorrectTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size)
+            "MULTIPLE_CHOICE_MULTIPLE_ANSWERS" -> multipleChoiceMultipleCorrectTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size)
+            "FILL_IN_THE_BLANK" -> fillTheBlankTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size)
+            "MATCH_THE_ANSWERS" -> matchTheAnswerTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size)
             else -> {
                 Log.e("LevelActivity", "Unknown task type: ${task?.type}. Skipping this task.")
                 loadNextTask()

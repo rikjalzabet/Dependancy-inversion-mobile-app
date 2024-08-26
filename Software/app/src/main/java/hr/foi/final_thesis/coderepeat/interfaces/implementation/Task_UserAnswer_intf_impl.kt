@@ -23,6 +23,10 @@ class Task_UserAnswer_intf_impl(private val task_userAnswerDao: Task_UserAnswerD
         return task_userAnswerDao.getUserAnswerForTask(taskId)
     }
 
+    override fun deleteAllTask_UserAnswers() {
+        task_userAnswerDao.deleteAllTask_UserAnswers()
+    }
+
     override fun insertTask_UserAnswer(task_userAnswer: Task_UserAnswer): Long {
         return task_userAnswerDao.insertTask_UserAnswer(task_userAnswer)
     }

@@ -3,6 +3,7 @@ package hr.foi.final_thesis.coderepeat.entities
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
+import androidx.room.Index
 
 @Entity(
     tableName = "Section_Level",
@@ -20,7 +21,8 @@ import androidx.room.ForeignKey.CASCADE
             childColumns = ["levelId"],
             onDelete = CASCADE
         )
-    ]
+    ],
+    indices=[Index("sectionId"), Index("levelId")]
 )
 data class Section_Level(
     val sectionId: Int,

@@ -75,4 +75,11 @@ class MultipleChoiceTask(
         val correctAnswers = TaskImpl.getTaskById(taskId)?.correctAnswer?.split("|##|") ?: emptyList()
         return userAnswer.sorted() == correctAnswers.sorted()
     }
+    override fun deleteAllUserAnswers() {
+        UserAnswerImpl.deleteAllUserAnswers()
+    }
+
+    override fun deleteAllTask_UserAnswers() {
+        TaskUserAnswerImpl.deleteAllTask_UserAnswers()
+    }
 }

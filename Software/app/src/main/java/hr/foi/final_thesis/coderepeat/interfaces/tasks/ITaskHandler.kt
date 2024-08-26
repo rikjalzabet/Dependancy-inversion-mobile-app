@@ -18,4 +18,6 @@ interface ITaskHandler{
     fun getUserAnswer(id: Int): String
     fun getUserLastAnswer(): UserAnswer
     fun validateUserAnswerWithCorrectAnswer(userAnswerId: Int, taskId: Int):Boolean
+    fun deleteAllUserAnswers()
+    fun deleteAllTask_UserAnswers()
 }

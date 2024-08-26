@@ -83,4 +83,11 @@ class MultipleChoiceSingleChoiceTask(
         Log.i("MultipleChoiceSingleCorrectTask", "User answer: ${userAnswer?.userAnswer} Task answer: ${task?.correctAnswer}")
         return userAnswer?.userAnswer == task?.correctAnswer
     }
+    override fun deleteAllUserAnswers() {
+        UserAnswerImpl.deleteAllUserAnswers()
+    }
+
+    override fun deleteAllTask_UserAnswers() {
+        TaskUserAnswerImpl.deleteAllTask_UserAnswers()
+    }
 }

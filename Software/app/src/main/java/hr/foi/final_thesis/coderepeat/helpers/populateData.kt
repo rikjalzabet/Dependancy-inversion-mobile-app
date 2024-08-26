@@ -100,6 +100,7 @@ suspend fun populateLevel_Task(context: Context) = withContext(Dispatchers.IO){
         Level_Task(levelId = levels[1].id, taskId = tasks[5].id, points = 0.0),
         Level_Task(levelId = levels[1].id, taskId = tasks[3].id, points = 0.0),
         Level_Task(levelId = levels[2].id, taskId = tasks[4].id, points = 0.0),
+        Level_Task(levelId = levels[2].id, taskId = tasks[6].id, points = 0.0),
         Level_Task(levelId = levels[4].id, taskId = tasks[9].id, points = 0.0),
         Level_Task(levelId = levels[4].id, taskId = tasks[10].id, points = 0.0),
         Level_Task(levelId = levels[3].id, taskId = tasks[7].id, points = 0.0),

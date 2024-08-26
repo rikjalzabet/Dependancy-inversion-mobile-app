@@ -75,4 +75,11 @@ class YesNoTask(
         Log.i("YesNoTask","User answer: ${userAnswer?.userAnswer} Task answer: ${task?.correctAnswer}")
         return userAnswer?.userAnswer?.toString() == task?.correctAnswer.toString()
     }
+    override fun deleteAllUserAnswers() {
+        UserAnswerImpl.deleteAllUserAnswers()
+    }
+
+    override fun deleteAllTask_UserAnswers() {
+        TaskUserAnswerImpl.deleteAllTask_UserAnswers()
+    }
 }

@@ -1,17 +1,10 @@
 package hr.foi.final_thesis.coderepeat.interfaces.tasks
 
-import android.content.Context
 import android.util.Log
-import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import hr.foi.final_thesis.coderepeat.R
-import hr.foi.final_thesis.coderepeat.adapters.tasks.MatchAnswerOptionsAdapter
 import hr.foi.final_thesis.coderepeat.entities.Level
 import hr.foi.final_thesis.coderepeat.entities.Task
 import hr.foi.final_thesis.coderepeat.entities.Task_UserAnswer
 import hr.foi.final_thesis.coderepeat.entities.UserAnswer
-import hr.foi.final_thesis.coderepeat.helpers.TaskType
 import hr.foi.final_thesis.coderepeat.interfaces.ILevel
 import hr.foi.final_thesis.coderepeat.interfaces.ILevel_Task
 import hr.foi.final_thesis.coderepeat.interfaces.ITask
@@ -87,5 +80,12 @@ class MatchTheAnswersTask(
 
     override fun getTaskQuestion(taskId: Int): String {
         return ""
+    }
+    override fun deleteAllUserAnswers() {
+        UserAnswerImpl.deleteAllUserAnswers()
+    }
+
+    override fun deleteAllTask_UserAnswers() {
+        TaskUserAnswerImpl.deleteAllTask_UserAnswers()
     }
 }

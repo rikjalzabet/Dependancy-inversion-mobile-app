@@ -18,6 +18,10 @@ class UserAnswer_intf_impl(private val userAnswerDao: UserAnswerDAO): IUserAnswe
         return userAnswerDao.getLatestInsertedUserAnswer()
     }
 
+    override fun deleteAllUserAnswers() {
+        userAnswerDao.deleteAllUserAnswers()
+    }
+
     override fun insertUserAnswers(userAnswer: UserAnswer): Long {
         return userAnswerDao.insertUserAnswers(userAnswer)
     }

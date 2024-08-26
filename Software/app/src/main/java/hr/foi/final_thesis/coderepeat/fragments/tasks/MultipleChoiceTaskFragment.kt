@@ -21,7 +21,9 @@ import kotlinx.coroutines.withContext
 
 class MultipleChoiceTaskFragment(
     private val taskHandler: ITaskHandler,
-    private var taskId: Int
+    private var taskId: Int,
+    private val currentTaskIndex: Int,
+    private val totalTasks: Int
 ) : Fragment() {
 
 
@@ -49,6 +51,11 @@ class MultipleChoiceTaskFragment(
 
         if (taskId != -1) {
             CoroutineScope(Dispatchers.IO).launch { displayTask() }
+        }
+        if(currentTaskIndex==totalTasks-1){
+            nextButton.text="Finish"
+        }else{
+            nextButton.text="Next"
         }
 
         nextButton.setOnClickListener {
@@ -107,6 +114,11 @@ class MultipleChoiceTaskFragment(
 
             withContext(Dispatchers.IO) {
                 (activity as LevelActivity).loadNextTask()
+            }
+            if(currentTaskIndex==totalTasks-1){
+                /*taskHandler.deleteAllUserAnswers()
+                taskHandler.deleteAllTask_UserAnswers()
+                Log.i("TaskGameInfo", "All user answers and task_user_answers deleted")*/
             }
         }
     }

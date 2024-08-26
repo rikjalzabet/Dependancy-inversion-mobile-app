@@ -74,4 +74,12 @@ class FillTheBlankTask(
         val correctAnswer = TaskImpl.getTaskById(taskId)?.correctAnswer?.trim()?.lowercase() ?: ""
         return userAnswer.equals(correctAnswer, ignoreCase = true)
     }
+
+    override fun deleteAllUserAnswers() {
+        UserAnswerImpl.deleteAllUserAnswers()
+    }
+
+    override fun deleteAllTask_UserAnswers() {
+        TaskUserAnswerImpl.deleteAllTask_UserAnswers()
+    }
 }

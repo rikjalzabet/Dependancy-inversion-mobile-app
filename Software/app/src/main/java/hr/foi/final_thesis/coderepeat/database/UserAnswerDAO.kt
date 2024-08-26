@@ -13,6 +13,8 @@ interface UserAnswerDAO {
     fun getAllUserAnswer():List<UserAnswer>
     @Query("SELECT * FROM UserAnswers WHERE id = :id")
     fun getUserAnswerById(id: Int): UserAnswer?
+    @Query("DELETE FROM UserAnswers")
+    fun deleteAllUserAnswers()
     @Insert
     fun insertUserAnswers(userAnswer: UserAnswer): Long
     @Query("SELECT * FROM UserAnswers ORDER BY id DESC LIMIT 1")

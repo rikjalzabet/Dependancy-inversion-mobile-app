@@ -8,6 +8,7 @@ interface IUserAnswer {
     fun getAllUserAnswer():List<UserAnswer>
     fun getUserAnswerById(id: Int): UserAnswer?
     fun getLatestInsertedUserAnswer(): UserAnswer
+    fun deleteAllUserAnswers()
     fun insertUserAnswers(userAnswer: UserAnswer): Long
     fun updateUserAnswers(userAnswer: UserAnswer)
     fun deleteUserAnswers(userAnswer: UserAnswer)
