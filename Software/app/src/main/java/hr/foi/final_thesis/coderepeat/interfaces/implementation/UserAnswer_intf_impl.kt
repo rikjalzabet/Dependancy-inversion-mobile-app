@@ -2,29 +2,29 @@ package hr.foi.final_thesis.coderepeat.interfaces.implementation
 
 import android.content.Context
 import hr.foi.final_thesis.coderepeat.database.AppDatabase
+import hr.foi.final_thesis.coderepeat.database.UserAnswerDAO
 import hr.foi.final_thesis.coderepeat.entities.UserAnswer
 import hr.foi.final_thesis.coderepeat.interfaces.IUserAnswer
 
-class UserAnswer_intf_impl(private val context: Context): IUserAnswer{
-    private val db = AppDatabase.getDatabase(context)
+class UserAnswer_intf_impl(private val userAnswerDao: UserAnswerDAO): IUserAnswer{
     override fun getAllUserAnswer(): List<UserAnswer> {
-        return db.userAnswerDao().getAllUserAnswer()
+        return userAnswerDao.getAllUserAnswer()
     }
     override fun getUserAnswerById(id: Int): UserAnswer? {
-        return db.userAnswerDao().getUserAnswerById(id)
+        return userAnswerDao.getUserAnswerById(id)
     }
 
     override fun getLatestInsertedUserAnswer(): UserAnswer {
-        return db.userAnswerDao().getLatestInsertedUserAnswer()
+        return userAnswerDao.getLatestInsertedUserAnswer()
     }
 
     override fun insertUserAnswers(userAnswer: UserAnswer): Long {
-        return db.userAnswerDao().insertUserAnswers(userAnswer)
+        return userAnswerDao.insertUserAnswers(userAnswer)
     }
     override fun updateUserAnswers(userAnswer: UserAnswer) {
-        db.userAnswerDao().updateUserAnswers(userAnswer)
+        userAnswerDao.updateUserAnswers(userAnswer)
     }
     override fun deleteUserAnswers(userAnswer: UserAnswer) {
-        db.userAnswerDao().deleteUserAnswers(userAnswer)
+        userAnswerDao.deleteUserAnswers(userAnswer)
     }
 }

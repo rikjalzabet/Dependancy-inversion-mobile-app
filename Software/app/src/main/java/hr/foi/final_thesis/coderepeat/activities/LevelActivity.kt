@@ -15,6 +15,9 @@ import hr.foi.final_thesis.coderepeat.adapters.tasks.YesNoAdapter
 import hr.foi.final_thesis.coderepeat.database.AppDatabase
 import hr.foi.final_thesis.coderepeat.database.LevelDAO
 import hr.foi.final_thesis.coderepeat.database.Level_TaskDAO
+import hr.foi.final_thesis.coderepeat.database.TaskDAO
+import hr.foi.final_thesis.coderepeat.database.Task_UserAnswerDAO
+import hr.foi.final_thesis.coderepeat.database.UserAnswerDAO
 import hr.foi.final_thesis.coderepeat.entities.Task
 import hr.foi.final_thesis.coderepeat.interfaces.implementation.Level_Intf_Impl
 import hr.foi.final_thesis.coderepeat.interfaces.implementation.Level_Task_Intf_Impl
@@ -34,6 +37,9 @@ import kotlinx.coroutines.withContext
 class LevelActivity : AppCompatActivity() {
     private lateinit var levelTaskDao: Level_TaskDAO
     private lateinit var levelDao: LevelDAO
+    private lateinit var taskDao: TaskDAO
+    private lateinit var taskUserAnswer: Task_UserAnswerDAO
+    private lateinit var userAnswer: UserAnswerDAO
     private lateinit var yesNoTaskAdapter: YesNoAdapter
     private lateinit var multipleChoiceSingleCorrectTaskAdapter: MultipleChoiceSingleCorrectAdapter
     private lateinit var multipleChoiceMultipleCorrectTaskAdapter: MultipleChoiceAdapter
@@ -57,6 +63,9 @@ class LevelActivity : AppCompatActivity() {
         val db = AppDatabase.getDatabase(this)
         levelDao = db.levelDao()
         levelTaskDao = db.level_taskDao()
+        taskDao = db.taskDao()
+        taskUserAnswer = db.task_userAnswerDao()
+        userAnswer = db.userAnswerDao()
 
         CoroutineScope(Dispatchers.IO).launch {
             val tasks = levelTaskDao.getTasksForLevel(levelId)
@@ -68,39 +77,39 @@ class LevelActivity : AppCompatActivity() {
         }
 
         yesNoTaskAdapter = YesNoAdapter(YesNoTask(
-            Level_Intf_Impl(this),
-            Task_Intf_Impl(this),
-            Level_Task_Intf_Impl(this),
-            Task_UserAnswer_intf_impl(this),
-            UserAnswer_intf_impl(this)
+            Level_Intf_Impl(levelDao),
+            Task_Intf_Impl(taskDao),
+            Level_Task_Intf_Impl(levelTaskDao),
+            Task_UserAnswer_intf_impl(taskUserAnswer),
+            UserAnswer_intf_impl(userAnswer)
         ))
         multipleChoiceSingleCorrectTaskAdapter = MultipleChoiceSingleCorrectAdapter(MultipleChoiceSingleChoiceTask(
-            Level_Intf_Impl(this),
-            Task_Intf_Impl(this),
-            Level_Task_Intf_Impl(this),
-            Task_UserAnswer_intf_impl(this),
-            UserAnswer_intf_impl(this)
+            Level_Intf_Impl(levelDao),
+            Task_Intf_Impl(taskDao),
+            Level_Task_Intf_Impl(levelTaskDao),
+            Task_UserAnswer_intf_impl(taskUserAnswer),
+            UserAnswer_intf_impl(userAnswer)
         ))
         multipleChoiceMultipleCorrectTaskAdapter = MultipleChoiceAdapter(MultipleChoiceTask(
-            Level_Intf_Impl(this),
-            Task_Intf_Impl(this),
-            Level_Task_Intf_Impl(this),
-            Task_UserAnswer_intf_impl(this),
-            UserAnswer_intf_impl(this)
+            Level_Intf_Impl(levelDao),
+            Task_Intf_Impl(taskDao),
+            Level_Task_Intf_Impl(levelTaskDao),
+            Task_UserAnswer_intf_impl(taskUserAnswer),
+            UserAnswer_intf_impl(userAnswer)
         ))
         fillTheBlankTaskAdapter = FillTheBlankAdapter(FillTheBlankTask(
-            Level_Intf_Impl(this),
-            Task_Intf_Impl(this),
-            Level_Task_Intf_Impl(this),
-            Task_UserAnswer_intf_impl(this),
-            UserAnswer_intf_impl(this)
+            Level_Intf_Impl(levelDao),
+            Task_Intf_Impl(taskDao),
+            Level_Task_Intf_Impl(levelTaskDao),
+            Task_UserAnswer_intf_impl(taskUserAnswer),
+            UserAnswer_intf_impl(userAnswer)
         ))
         matchTheAnswerTaskAdapter = MatchTheAnswersAdapter(MatchTheAnswersTask(
-            Level_Intf_Impl(this),
-            Task_Intf_Impl(this),
-            Level_Task_Intf_Impl(this),
-            Task_UserAnswer_intf_impl(this),
-            UserAnswer_intf_impl(this)
+            Level_Intf_Impl(levelDao),
+            Task_Intf_Impl(taskDao),
+            Level_Task_Intf_Impl(levelTaskDao),
+            Task_UserAnswer_intf_impl(taskUserAnswer),
+            UserAnswer_intf_impl(userAnswer)
         ))
 
         CoroutineScope(Dispatchers.IO).launch {
