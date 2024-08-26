@@ -10,6 +10,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import hr.foi.final_thesis.coderepeat.R
 import hr.foi.final_thesis.coderepeat.adapters.tasks.FillTheBlankAdapter
+import hr.foi.final_thesis.coderepeat.adapters.tasks.MatchTheAnswersAdapter
+import hr.foi.final_thesis.coderepeat.adapters.tasks.MatchTheAnswersTaskAdapter
 import hr.foi.final_thesis.coderepeat.adapters.tasks.MultipleChoiceAdapter
 import hr.foi.final_thesis.coderepeat.adapters.tasks.MultipleChoiceSingleCorrectAdapter
 import hr.foi.final_thesis.coderepeat.adapters.tasks.YesNoAdapter
@@ -18,6 +20,7 @@ import hr.foi.final_thesis.coderepeat.database.LevelDAO
 import hr.foi.final_thesis.coderepeat.database.Level_TaskDAO
 import hr.foi.final_thesis.coderepeat.entities.Task
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.FillTheBlankTask
+import hr.foi.final_thesis.coderepeat.interfaces.tasks.MatchTheAnswersTask
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.MultipleChoiceSingleChoiceTask
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.MultipleChoiceTask
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.YesNoTask
@@ -33,6 +36,7 @@ class LevelActivity : AppCompatActivity() {
     private lateinit var multipleChoiceSingleCorrectTaskAdapter: MultipleChoiceSingleCorrectAdapter
     private lateinit var multipleChoiceMultipleCorrectTaskAdapter: MultipleChoiceAdapter
     private lateinit var fillTheBlankTaskAdapter: FillTheBlankAdapter
+    private lateinit var matchTheAnswerTaskAdapter: MatchTheAnswersTaskAdapter
 
     private var currentTaskIndex: Int = 0
     private var levelId: Int = 0
@@ -65,6 +69,7 @@ class LevelActivity : AppCompatActivity() {
         multipleChoiceSingleCorrectTaskAdapter= MultipleChoiceSingleCorrectAdapter(MultipleChoiceSingleChoiceTask(this))
         multipleChoiceMultipleCorrectTaskAdapter = MultipleChoiceAdapter(MultipleChoiceTask(this))
         fillTheBlankTaskAdapter = FillTheBlankAdapter(FillTheBlankTask(this))
+        matchTheAnswerTaskAdapter=MatchTheAnswersTaskAdapter(MatchTheAnswersTask(this))
 
         CoroutineScope(Dispatchers.IO).launch {
             tasks = levelTaskDao.getTasksForLevel(levelId)
@@ -88,6 +93,7 @@ class LevelActivity : AppCompatActivity() {
             "MULTIPLE_CHOICE_SINGLE_ANSWER" -> multipleChoiceSingleCorrectTaskAdapter.createFragment(taskId)
             "MULTIPLE_CHOICE_MULTIPLE_ANSWERS" -> multipleChoiceMultipleCorrectTaskAdapter.createFragment(taskId)
             "FILL_IN_THE_BLANK" -> fillTheBlankTaskAdapter.createFragment(taskId)
+            "MATCH_THE_ANSWERS" -> matchTheAnswerTaskAdapter.createFragment(taskId)
             else -> {
                 Log.e("LevelActivity", "Unknown task type: ${task?.type}. Skipping this task.")
                 loadNextTask()

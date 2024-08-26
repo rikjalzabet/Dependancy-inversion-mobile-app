@@ -26,11 +26,6 @@ class LevelAdapter(
 
         init {
             itemView.setOnClickListener {
-                /*val position=adapterPosition
-                if(position!= RecyclerView.NO_POSITION){
-                    val level=levels[position]
-                    onLevelClick(level)
-                }*/
                 val level = levels[adapterPosition]
                 Log.i("LevelAdapter", "Level clicked: ${level.name}")
                 onLevelClick(level)
@@ -63,7 +58,6 @@ class LevelAdapter(
                 Log.i("LevelAdapter","Clicked Item directly ${level.name}")
             }
         }
-
         override fun getItemCount(): Int = levels.size
 }
 

@@ -43,11 +43,9 @@ interface ITaskHandler{
     fun getTaskCorrectAnswer(taskId: Int): String
     fun getTaskGrade(taskId: Int): Boolean
     fun getTaskType(taskId: Int): String
-    fun getTaskQuestionMultiple():List<String>
+    fun getTaskQuestionMultiple(taskId: Int):List<String>
     fun setUserAnswer(userAnswer: String, taskId: Int, userAnswerId: Int)
     fun getUserAnswer(id: Int): String
     fun getUserLastAnswer(): UserAnswer
     fun validateUserAnswerWithCorrectAnswer(userAnswerId: Int, taskId: Int):Boolean
-    //fun displayTask(view: View)
-    //fun saveAnswerToDatabase(answer:String)
 }

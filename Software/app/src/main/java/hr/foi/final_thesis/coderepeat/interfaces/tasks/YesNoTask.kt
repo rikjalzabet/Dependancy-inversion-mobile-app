@@ -60,7 +60,7 @@ class YesNoTask(
         return "YES_NO"
     }
 
-    override fun getTaskQuestionMultiple(): List<String> {
+    override fun getTaskQuestionMultiple(taskId: Int): List<String> {
         return emptyList()
     }
 

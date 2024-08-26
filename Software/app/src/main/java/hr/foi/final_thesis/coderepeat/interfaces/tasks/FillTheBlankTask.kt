@@ -50,7 +50,7 @@ class FillTheBlankTask(
         return "FILL_IN_THE_BLANK"
     }
 
-    override fun getTaskQuestionMultiple(): List<String> {
+    override fun getTaskQuestionMultiple(taskId: Int): List<String> {
         return emptyList()
     }
 

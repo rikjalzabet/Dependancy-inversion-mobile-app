@@ -51,7 +51,7 @@ class MultipleChoiceSingleChoiceTask(
         return "MULTIPLE_CHOICE_SINGLE_ANSWER"
     }
 
-    override fun getTaskQuestionMultiple(): List<String> {
+    override fun getTaskQuestionMultiple(taskId: Int): List<String> {
         return emptyList()
     }
 
