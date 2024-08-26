@@ -6,12 +6,9 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import hr.foi.final_thesis.coderepeat.R
 import hr.foi.final_thesis.coderepeat.adapters.tasks.FillTheBlankAdapter
 import hr.foi.final_thesis.coderepeat.adapters.tasks.MatchTheAnswersAdapter
-import hr.foi.final_thesis.coderepeat.adapters.tasks.MatchTheAnswersTaskAdapter
 import hr.foi.final_thesis.coderepeat.adapters.tasks.MultipleChoiceAdapter
 import hr.foi.final_thesis.coderepeat.adapters.tasks.MultipleChoiceSingleCorrectAdapter
 import hr.foi.final_thesis.coderepeat.adapters.tasks.YesNoAdapter
@@ -36,7 +33,7 @@ class LevelActivity : AppCompatActivity() {
     private lateinit var multipleChoiceSingleCorrectTaskAdapter: MultipleChoiceSingleCorrectAdapter
     private lateinit var multipleChoiceMultipleCorrectTaskAdapter: MultipleChoiceAdapter
     private lateinit var fillTheBlankTaskAdapter: FillTheBlankAdapter
-    private lateinit var matchTheAnswerTaskAdapter: MatchTheAnswersTaskAdapter
+    private lateinit var matchTheAnswerTaskAdapter: MatchTheAnswersAdapter
 
     private var currentTaskIndex: Int = 0
     private var levelId: Int = 0
@@ -69,7 +66,7 @@ class LevelActivity : AppCompatActivity() {
         multipleChoiceSingleCorrectTaskAdapter= MultipleChoiceSingleCorrectAdapter(MultipleChoiceSingleChoiceTask(this))
         multipleChoiceMultipleCorrectTaskAdapter = MultipleChoiceAdapter(MultipleChoiceTask(this))
         fillTheBlankTaskAdapter = FillTheBlankAdapter(FillTheBlankTask(this))
-        matchTheAnswerTaskAdapter=MatchTheAnswersTaskAdapter(MatchTheAnswersTask(this))
+        matchTheAnswerTaskAdapter=MatchTheAnswersAdapter(MatchTheAnswersTask(this))
 
         CoroutineScope(Dispatchers.IO).launch {
             tasks = levelTaskDao.getTasksForLevel(levelId)

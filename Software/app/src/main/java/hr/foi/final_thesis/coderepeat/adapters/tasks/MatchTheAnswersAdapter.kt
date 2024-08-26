@@ -16,19 +16,19 @@ import hr.foi.final_thesis.coderepeat.fragments.tasks.MatchTheAnswersTaskFragmen
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.ITaskHandler
 
 class MatchTheAnswersAdapter(
-    private var questions: List<String>,
-    private var options: List<String>
+    private val taskHandler: ITaskHandler
 ) : RecyclerView.Adapter<MatchTheAnswersAdapter.ViewHolder>(){
-    //private val userAnswers: MutableList<String> = mutableListOf()
-    private val userAnswers = MutableList(questions.size){""}
+    private var questions: List<String> = emptyList()
+    private var options: List<String> = emptyList()
+    private val userAnswers = mutableListOf<String>()
 
-    /*fun setTaskData(questions: List<String>, options: List<String>) {
+    fun setTaskData(questions: List<String>, options: List<String>) {
         this.questions = questions
         this.options = options
         this.userAnswers.clear()
         repeat(questions.size){userAnswers.add("")}
         notifyDataSetChanged()
-    }*/
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_match, parent, false)
@@ -40,7 +40,6 @@ class MatchTheAnswersAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //val question = questions[position]
         val currentPosition = holder.adapterPosition
         if(currentPosition != RecyclerView.NO_POSITION) {
             holder.leftItemTextView.text = questions[currentPosition]
@@ -51,7 +50,7 @@ class MatchTheAnswersAdapter(
 
             holder.rightItemSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-                    userAnswers[currentPosition] = "${questions[currentPosition]} ${options[pos]}" //options[pos]
+                    userAnswers[currentPosition] = "${questions[currentPosition]} ${options[pos]}"
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
@@ -64,5 +63,12 @@ class MatchTheAnswersAdapter(
     override fun getItemCount(): Int = questions.size
     fun getUserAnswers(): List<String> {
         return userAnswers
+    }
+    fun createFragment(taskId: Int): Fragment {
+        return MatchTheAnswersTaskFragment(taskHandler, taskId).apply {
+            arguments = Bundle().apply {
+                putInt("TASK_ID", taskId)
+            }
+        }
     }
 }

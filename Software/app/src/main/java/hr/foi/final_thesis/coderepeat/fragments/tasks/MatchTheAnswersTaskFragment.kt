@@ -62,7 +62,9 @@ class MatchTheAnswersTaskFragment (
             Log.i("Questions and options: ", "$questions, $options")
                 questionTextView.text="Match the following items:"
                 recyclerView.layoutManager = LinearLayoutManager(context)
-                recyclerView.adapter = MatchTheAnswersAdapter(questions,options)
+                val adapter = MatchTheAnswersAdapter(taskHandler)
+                adapter.setTaskData(questions, options)
+                recyclerView.adapter = adapter
             }
         }
     }
