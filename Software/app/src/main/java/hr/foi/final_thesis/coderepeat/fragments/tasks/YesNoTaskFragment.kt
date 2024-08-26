@@ -1,5 +1,6 @@
 package hr.foi.final_thesis.coderepeat.fragments.tasks
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import hr.foi.final_thesis.coderepeat.R
 import hr.foi.final_thesis.coderepeat.activities.LevelActivity
+import hr.foi.final_thesis.coderepeat.activities.LevelSummaryActivity
 import hr.foi.final_thesis.coderepeat.entities.Task
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.ITaskHandler
 import kotlinx.coroutines.CoroutineScope
@@ -92,13 +94,15 @@ class YesNoTaskFragment(
                 Log.d("TaskGameInfo", "YES_NO - Is Correct: $isCorrect, ${taskHandler.getTask(taskId)?.question}")
 
                 withContext(Dispatchers.IO) {
+                    if(currentTaskIndex==totalTasks-1){
+                        /*taskHandler.deleteAllUserAnswers()
+                        taskHandler.deleteAllTask_UserAnswers()
+                        Log.i("TaskGameInfo", "All user answers and task_user_answers deleted")*/
+
+                    }else
                     (activity as LevelActivity).loadNextTask()
                 }
-                if(currentTaskIndex==totalTasks-1){
-                    /*taskHandler.deleteAllUserAnswers()
-                    taskHandler.deleteAllTask_UserAnswers()
-                    Log.i("TaskGameInfo", "All user answers and task_user_answers deleted")*/
-                }
+
             }
         }
 }

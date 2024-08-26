@@ -120,6 +120,7 @@ class LevelActivity : AppCompatActivity() {
                 Log.i("LevelActivity", "TaskID: ${task.id}, Task type: ${task.type} Task CA: ${task.correctAnswer}, Task Q: ${task.question} Task O: ${task.options}")
             }
             withContext(Dispatchers.Main) {
+
                 if (!tasks.isNullOrEmpty()) {
                     loadTaskFragment(tasks!![currentTaskIndex].id)
                 }
