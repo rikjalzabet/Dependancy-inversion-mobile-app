@@ -47,8 +47,8 @@ class LevelSummaryAdapter(
     override fun onBindViewHolder(holder: LevelSummaryHolder, position: Int) {
         val (task, userAnswers) = taskUserAnswerList[position]
 
-        taskQuestion.text = task.question
-        userAnswer.text = userAnswers[0].userAnswer
-        correctAnswer.text = task.correctAnswer
+        taskQuestion.text ="Question: "+ task.question
+        userAnswer.text ="Your answer: "+ if(userAnswers[0].userAnswer=="") userAnswers[0].userMultipleAnswer else userAnswers[0].userAnswer
+        correctAnswer.text ="Correct answer: "+ task.correctAnswer
     }
 }
