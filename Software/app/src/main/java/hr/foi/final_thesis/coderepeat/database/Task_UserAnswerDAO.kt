@@ -22,6 +22,8 @@ interface Task_UserAnswerDAO {
     fun getAllTask_UserAnswers(): List<Task_UserAnswer>
     @Query("SELECT * FROM UserAnswers WHERE id IN (SELECT answerId FROM Task_UserAnswer WHERE taskId = :taskId)")
     fun getUserAnswerForTask(taskId: Int): List<UserAnswer>
+    @Query("SELECT * FROM Task_UserAnswer WHERE taskId = :taskId AND answerId = :answerId")
+    fun getUserAnswerByTaskIdAndUAnswerId(taskId: Int, answerId: Int): Task_UserAnswer
     @Query("DELETE FROM Task_UserAnswer")
     fun deleteAllTask_UserAnswers()
     @Insert

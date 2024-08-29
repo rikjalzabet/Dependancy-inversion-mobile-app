@@ -1,5 +1,6 @@
 package hr.foi.final_thesis.coderepeat.fragments.tasks
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import hr.foi.final_thesis.coderepeat.R
 import hr.foi.final_thesis.coderepeat.activities.LevelActivity
+import hr.foi.final_thesis.coderepeat.activities.LevelSummaryActivity
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.ITaskHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +25,8 @@ class FillTheBlankTaskFragment(
     private val taskHandler: ITaskHandler,
     private var taskId: Int,
     private val currentTaskIndex: Int,
-    private val totalTasks: Int
+    private val totalTasks: Int,
+    private val levelId: Int
 ): Fragment() {
     private lateinit var questionTextView: TextView
     private lateinit var userAnswerEditText: EditText
@@ -83,12 +86,15 @@ class FillTheBlankTaskFragment(
             Log.d("TaskGameInfo", "FILL_IN_THE_BLANK - Is Correct: $isCorrect")
 
             withContext(Dispatchers.IO) {
-                (activity as LevelActivity).loadNextTask()
-            }
-            if(currentTaskIndex==totalTasks-1){
-                /*taskHandler.deleteAllUserAnswers()
-                taskHandler.deleteAllTask_UserAnswers()
-                Log.i("TaskGameInfo", "All user answers and task_user_answers deleted")*/
+                if(currentTaskIndex==totalTasks-1){
+                    (activity as LevelActivity).loadNextTask()
+                    LevelSummaryActivity.taskHandler = taskHandler
+                    LevelSummaryActivity.levelId=levelId
+                    val intent = Intent(context, LevelSummaryActivity::class.java)
+                    startActivity(intent)
+                }else {
+                    (activity as LevelActivity).loadNextTask()
+                }
             }
         }
     }

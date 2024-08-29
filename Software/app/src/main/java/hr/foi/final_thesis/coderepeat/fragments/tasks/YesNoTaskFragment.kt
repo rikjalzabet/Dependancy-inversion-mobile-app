@@ -28,7 +28,8 @@ class YesNoTaskFragment(
     private val taskHandler: ITaskHandler,
     private var taskId: Int,
     private val currentTaskIndex: Int,
-    private val totalTasks: Int
+    private val totalTasks: Int,
+    private val levelId: Int
 ) : Fragment() {
         private lateinit var questionTextView: TextView
         private lateinit var yesButton: RadioButton
@@ -95,12 +96,15 @@ class YesNoTaskFragment(
 
                 withContext(Dispatchers.IO) {
                     if(currentTaskIndex==totalTasks-1){
-                        /*taskHandler.deleteAllUserAnswers()
-                        taskHandler.deleteAllTask_UserAnswers()
-                        Log.i("TaskGameInfo", "All user answers and task_user_answers deleted")*/
+                        (activity as LevelActivity).loadNextTask()
 
-                    }else
-                    (activity as LevelActivity).loadNextTask()
+                        LevelSummaryActivity.taskHandler = taskHandler
+                        LevelSummaryActivity.levelId=levelId
+                        val intent = Intent(context, LevelSummaryActivity::class.java)
+                        startActivity(intent)
+                    }else {
+                        (activity as LevelActivity).loadNextTask()
+                    }
                 }
 
             }

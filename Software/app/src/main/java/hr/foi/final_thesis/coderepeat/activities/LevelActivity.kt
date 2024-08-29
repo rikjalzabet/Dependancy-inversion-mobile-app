@@ -131,11 +131,11 @@ class LevelActivity : AppCompatActivity() {
         val task = tasks?.find { it.id == taskId }
 
         val fragment = when (task?.type) {
-            "YES_NO" -> yesNoTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size)
-            "MULTIPLE_CHOICE_SINGLE_ANSWER" -> multipleChoiceSingleCorrectTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size)
-            "MULTIPLE_CHOICE_MULTIPLE_ANSWERS" -> multipleChoiceMultipleCorrectTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size)
-            "FILL_IN_THE_BLANK" -> fillTheBlankTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size)
-            "MATCH_THE_ANSWERS" -> matchTheAnswerTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size)
+            "YES_NO" -> yesNoTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size, levelId)
+            "MULTIPLE_CHOICE_SINGLE_ANSWER" -> multipleChoiceSingleCorrectTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size, levelId)
+            "MULTIPLE_CHOICE_MULTIPLE_ANSWERS" -> multipleChoiceMultipleCorrectTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size, levelId)
+            "FILL_IN_THE_BLANK" -> fillTheBlankTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size, levelId)
+            "MATCH_THE_ANSWERS" -> matchTheAnswerTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size, levelId)
             else -> {
                 Log.e("LevelActivity", "Unknown task type: ${task?.type}. Skipping this task.")
                 loadNextTask()

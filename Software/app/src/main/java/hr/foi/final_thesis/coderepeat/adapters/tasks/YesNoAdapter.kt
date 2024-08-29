@@ -18,8 +18,8 @@ import hr.foi.final_thesis.coderepeat.interfaces.tasks.ITaskHandler
 class YesNoAdapter(
 private val taskHandler: ITaskHandler
 ) {
-    fun createFragment(taskId: Int, currentTaskIndex: Int, totalTasks: Int): Fragment {
-        return YesNoTaskFragment(taskHandler, taskId, currentTaskIndex, totalTasks).apply {
+    fun createFragment(taskId: Int, currentTaskIndex: Int, totalTasks: Int, levelId: Int): Fragment {
+        return YesNoTaskFragment(taskHandler, taskId, currentTaskIndex, totalTasks, levelId).apply {
             arguments = Bundle().apply {
                 putInt("TASK_ID", taskId)
             }

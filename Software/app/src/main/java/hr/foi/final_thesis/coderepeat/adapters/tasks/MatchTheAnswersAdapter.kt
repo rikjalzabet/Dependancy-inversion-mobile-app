@@ -64,8 +64,8 @@ class MatchTheAnswersAdapter(
     fun getUserAnswers(): List<String> {
         return userAnswers
     }
-    fun createFragment(taskId: Int, currentTaskIndex: Int, totalTasks: Int): Fragment {
-        return MatchTheAnswersTaskFragment(taskHandler, taskId, currentTaskIndex, totalTasks).apply {
+    fun createFragment(taskId: Int, currentTaskIndex: Int, totalTasks: Int, levelId: Int): Fragment {
+        return MatchTheAnswersTaskFragment(taskHandler, taskId, currentTaskIndex, totalTasks, levelId).apply {
             arguments = Bundle().apply {
                 putInt("TASK_ID", taskId)
             }
