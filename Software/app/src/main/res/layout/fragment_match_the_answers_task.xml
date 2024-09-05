@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".fragments.tasks.MatchTheAnswersTaskFragment"
     android:padding="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="35dp">
 
         <TextView
             android:id="@+id/fragment_match_the_answers_task_TV_Question"

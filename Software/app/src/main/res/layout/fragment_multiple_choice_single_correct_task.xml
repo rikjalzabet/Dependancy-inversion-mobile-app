@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".fragments.tasks.MultipleChoiceSingleCorrectTaskFragment"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layout_marginTop="35dp">
 
     <TextView
         android:id="@+id/fragment_multiple_choice_single_correct_task_TV_Question"

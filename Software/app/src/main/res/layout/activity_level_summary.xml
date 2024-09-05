@@ -8,7 +8,8 @@
     android:layout_height="match_parent"
     tools:context=".activities.LevelSummaryActivity"
     android:padding="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="35dp">
 
         <TextView
             android:id="@+id/activity_level_summary_tv_summary_title"

@@ -6,8 +6,12 @@ import hr.foi.final_thesis.coderepeat.entities.Section
 import hr.foi.final_thesis.coderepeat.entities.Section_Level
 import hr.foi.final_thesis.coderepeat.entities.Streak
 import hr.foi.final_thesis.coderepeat.entities.Task
+import hr.foi.final_thesis.coderepeat.helpers.DateConverter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.Date
 
 suspend fun populateData(context: Context) {
     populateSection(context)
@@ -112,6 +116,6 @@ suspend fun populateLevel_Task(context: Context) = withContext(Dispatchers.IO){
 
 suspend fun populateStreak(context: Context) = withContext(Dispatchers.IO){
     val db = AppDatabase.getDatabase(context)
-    val streak = Streak(currentStreak = 0, startDate = "", lastActiveDate = "")
+    val streak = Streak(currentStreak = 0, startDate = "", lastActiveDate = "")//YYYY-MM-DD
     db.streakDao().insertStreak(streak)
 }

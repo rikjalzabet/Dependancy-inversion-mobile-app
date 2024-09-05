@@ -12,6 +12,11 @@ class AppNavigation_Intf_Impl(
         activityCall(fragment)
     }
 
+    override fun navigateToStreak() {
+        val fragment=fragmentList[1]
+        activityCall(fragment)
+    }
+
     private fun activityCall(fragment: Fragment){
         activity
             .supportFragmentManager
