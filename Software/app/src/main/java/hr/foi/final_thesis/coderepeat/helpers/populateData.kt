@@ -116,6 +116,6 @@ suspend fun populateLevel_Task(context: Context) = withContext(Dispatchers.IO){
 
 suspend fun populateStreak(context: Context) = withContext(Dispatchers.IO){
     val db = AppDatabase.getDatabase(context)
-    val streak = Streak(currentStreak = 0, startDate = "", lastActiveDate = "")//YYYY-MM-DD
+    val streak = Streak(currentStreak = 5, startDate = "2024-09-01", lastActiveDate = "2024-09-05")//YYYY-MM-DD
     db.streakDao().insertStreak(streak)
 }
