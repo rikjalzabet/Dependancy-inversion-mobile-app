@@ -14,6 +14,8 @@ interface LevelDAO {
     fun getAllLevels():List<Level>
     @Query("SELECT * FROM Level WHERE id = :id")
     fun getLevelById(id: Int): Level?
+    @Query("SELECT score FROM Level WHERE id = :levelId")
+    fun getLevelPointsByLevelId(levelId: Int): Int
     @Insert
     fun insertLevel(level: Level): Long
     @Update

@@ -19,10 +19,15 @@ interface Level_TaskDAO {
     fun getAllLevel_Tasks(): List<Level_Task>
     @Query("SELECT points FROM Level_Task WHERE levelId = :levelId AND taskId = :taskId")
     fun getPointsForLevelTask(levelId: Int, taskId: Int): Double
+    @Query("SELECT * FROM Task WHERE id IN (SELECT taskId FROM Level_Task WHERE levelId = :levelId AND type = :type)")
+    fun getTaskByLevelIdAndTaskType(levelId: Int, type: String): Task
     @Insert
     fun insertLevel_Task(level_task: Level_Task): Long
     @Update
     fun updateLevel_Task(level_task: Level_Task)
+    @Query("UPDATE Level_Task SET points = :points WHERE levelId = :levelId AND taskId = :taskId")
+    fun updatePointsLevel_Task(levelId: Int, taskId: Int, points: Double)
+
     @Query("DELETE FROM Level_Task WHERE levelId = :levelId AND taskId = :taskId")
     fun deleteLevel_Task(levelId: Int, taskId: Int)
     @Delete

@@ -2,6 +2,7 @@ package hr.foi.final_thesis.coderepeat.entities
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 
 @Entity(
     tableName = "Task_UserAnswer",
@@ -19,7 +20,8 @@ import androidx.room.ForeignKey
             childColumns = ["taskId"],
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    indices=[Index("answerId"), Index("taskId")]
 )
 data class Task_UserAnswer(
     val answerId: Int,

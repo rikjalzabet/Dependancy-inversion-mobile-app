@@ -12,6 +12,8 @@ import hr.foi.final_thesis.coderepeat.R
 import hr.foi.final_thesis.coderepeat.database.Level_TaskDAO
 import hr.foi.final_thesis.coderepeat.entities.Level
 import hr.foi.final_thesis.coderepeat.interfaces.ILevel_Task
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 
 class LevelAdapter(
@@ -22,15 +24,11 @@ class LevelAdapter(
     inner class LevelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         internal val levelNumber = itemView.findViewById<TextView>(R.id.level_list_item_tv_level_number)
         internal val levelName = itemView.findViewById<TextView>(R.id.level_list_item_tv_level_name)
+        internal val levelPoints=itemView.findViewById<TextView>(R.id.level_list_item_tv_level_points)
         internal val levelLayout = itemView.findViewById<LinearLayout>(R.id.level_list_item_ll_level_info)
 
         init {
             itemView.setOnClickListener {
-                /*val position=adapterPosition
-                if(position!= RecyclerView.NO_POSITION){
-                    val level=levels[position]
-                    onLevelClick(level)
-                }*/
                 val level = levels[adapterPosition]
                 Log.i("LevelAdapter", "Level clicked: ${level.name}")
                 onLevelClick(level)
@@ -59,11 +57,17 @@ class LevelAdapter(
             holder.levelName.text=level.name
             holder.levelNumber.text="Level $lvlNmbCounter"
 
+            if(level.score > 0){
+                holder.levelPoints.visibility=View.VISIBLE
+                holder.levelPoints.text=" (best score: ${level.score})"
+            }else{
+                holder.levelPoints.visibility=View.GONE
+            }
+
             holder.itemView.setOnClickListener {
                 Log.i("LevelAdapter","Clicked Item directly ${level.name}")
             }
         }
-
         override fun getItemCount(): Int = levels.size
 }
 

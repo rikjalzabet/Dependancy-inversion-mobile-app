@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class Level(
     @PrimaryKey(autoGenerate = true) val id: Int=0,
     val name: String,
-    val description: String
+    val description: String,
+    var score: Int = 0
 )

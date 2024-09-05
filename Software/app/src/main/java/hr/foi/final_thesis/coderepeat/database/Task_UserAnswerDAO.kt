@@ -20,6 +20,12 @@ interface Task_UserAnswerDAO {
     fun getAnswerForTask(taskId: Int): List<UserAnswer>
     @Query("SELECT * FROM Task_UserAnswer")
     fun getAllTask_UserAnswers(): List<Task_UserAnswer>
+    @Query("SELECT * FROM UserAnswers WHERE id IN (SELECT answerId FROM Task_UserAnswer WHERE taskId = :taskId)")
+    fun getUserAnswerForTask(taskId: Int): List<UserAnswer>
+    @Query("SELECT * FROM Task_UserAnswer WHERE taskId = :taskId AND answerId = :answerId")
+    fun getUserAnswerByTaskIdAndUAnswerId(taskId: Int, answerId: Int): Task_UserAnswer
+    @Query("DELETE FROM Task_UserAnswer")
+    fun deleteAllTask_UserAnswers()
     @Insert
     fun insertTask_UserAnswer(task_userAnswer: Task_UserAnswer): Long
     @Update

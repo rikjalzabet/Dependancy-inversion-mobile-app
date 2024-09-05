@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_home -> {
                     appNavigation.navigateToHome()
                 }
+                R.id.nav_streak -> {
+                    appNavigation.navigateToStreak()
+                }
             }
             true
         }

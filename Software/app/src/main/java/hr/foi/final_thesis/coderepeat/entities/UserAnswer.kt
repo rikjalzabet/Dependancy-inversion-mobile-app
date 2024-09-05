@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "UserAnswers")
 data class UserAnswer(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val levelId: Int,
     val userAnswer: String,
     val userMultipleAnswer: String,
 )

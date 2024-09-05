@@ -9,8 +9,10 @@ interface ILevel_Task {
     fun getLevelsForTask(taskId: Int): List<Level>
     fun getAllLevel_Tasks(): List<Level_Task>
     fun getPointsForLevelTask(levelId: Int, taskId: Int): Double
+    fun getTaskByLevelIdAndTaskType(levelId: Int, type: String): Task
     fun insertLevel_Task(level_task: Level_Task)
     fun updateLevel_Task(level_task: Level_Task)
+    fun updatePointsLevel_Task(levelId: Int, taskId: Int, points: Double)
     fun deleteLevel_Task(levelId: Int, taskId: Int)
     fun deleteFromLevel_Task(Level_Task: Level_Task)
 }

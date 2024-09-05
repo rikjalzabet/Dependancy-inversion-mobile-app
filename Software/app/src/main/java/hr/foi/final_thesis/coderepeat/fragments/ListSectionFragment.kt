@@ -40,6 +40,9 @@ class ListSectionFragment : Fragment() {
     private lateinit var levelTask: ILevel_Task
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
+    private lateinit var levelTaskDAO: Level_TaskDAO
+    private lateinit var sectionDao: SectionDAO
+    private lateinit var sectionLevelDAO: Section_LevelDAO
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,12 +56,13 @@ class ListSectionFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         val db = AppDatabase.getDatabase(requireContext())
-        //sectionDao = db.sectionDao()
-        section = Section_Intf_Impl(requireContext())
-        sectionLevel = Section_Level_Intf_Impl(requireContext())
-        //sectionLevel = db.section_levelDao()
-        levelTask= Level_Task_Intf_Impl(requireContext())
-        //levelTask = db.level_taskDao()
+        levelTaskDAO = db.level_taskDao()
+        sectionDao = db.sectionDao()
+        sectionLevelDAO = db.section_levelDao()
+
+        section = Section_Intf_Impl(sectionDao)
+        sectionLevel = Section_Level_Intf_Impl(sectionLevelDAO)
+        levelTask= Level_Task_Intf_Impl(levelTaskDAO)
 
 
         CoroutineScope(Dispatchers.IO).launch {
