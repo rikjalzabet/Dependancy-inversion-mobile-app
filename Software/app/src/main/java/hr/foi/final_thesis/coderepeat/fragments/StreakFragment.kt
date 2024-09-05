@@ -78,14 +78,9 @@ class StreakFragment : Fragment() {
             }
 
             override fun decorate(view: DayViewFacade) {
-                view.addSpan(DotSpan(5f, Color.GREEN))
+                view.addSpan(DotSpan(5f, Color.RED))
             }
         }
         calendarView.addDecorator(decorator)
-        /*calendarView.state().edit()
-            .setMinimumDate(CalendarDay.from(2024, 9, 4))
-            .setMaximumDate(CalendarDay.from(2024, 9, 10))
-            .commit()*/
-
     }
 }
