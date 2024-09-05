@@ -35,7 +35,6 @@ class StreakFragment : Fragment() {
 
         loadStreakData()
 
-
         if (currentStreak > 0) {
             highlightDatesOnCalendar()
         }
@@ -53,8 +52,7 @@ class StreakFragment : Fragment() {
             lastActiveDate = streak[0].lastActiveDate
         }
     }
-
     private fun highlightDatesOnCalendar() {
-        
+
     }
 }

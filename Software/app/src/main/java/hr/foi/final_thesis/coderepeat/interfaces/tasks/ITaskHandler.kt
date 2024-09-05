@@ -20,4 +20,5 @@ interface ITaskHandler{
     fun validateUserAnswerWithCorrectAnswer(userAnswerId: Int, taskId: Int):Boolean
     fun deleteAllUserAnswers()
     fun deleteAllTask_UserAnswers()
+    fun updateTaskPoints(taskId: Int, levelId: Int)
 }

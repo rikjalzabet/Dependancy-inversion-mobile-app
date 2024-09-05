@@ -13,6 +13,9 @@ class Level_Intf_Impl(private val levelDao: LevelDAO) : ILevel {
     override fun getLevelById(id: Int): Level? {
         return levelDao.getLevelById(id)
     }
+    override fun getLevelPointsByLevelId(levelId: Int): Int {
+        return levelDao.getLevelPointsByLevelId(levelId)
+    }
     override fun insertLevel(level: Level): Long {
         return levelDao.insertLevel(level)
     }

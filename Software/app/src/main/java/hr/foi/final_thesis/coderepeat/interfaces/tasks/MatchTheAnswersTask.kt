@@ -2,6 +2,7 @@ package hr.foi.final_thesis.coderepeat.interfaces.tasks
 
 import android.util.Log
 import hr.foi.final_thesis.coderepeat.entities.Level
+import hr.foi.final_thesis.coderepeat.entities.Level_Task
 import hr.foi.final_thesis.coderepeat.entities.Task
 import hr.foi.final_thesis.coderepeat.entities.Task_UserAnswer
 import hr.foi.final_thesis.coderepeat.entities.UserAnswer
@@ -87,5 +88,12 @@ class MatchTheAnswersTask(
 
     override fun deleteAllTask_UserAnswers() {
         TaskUserAnswerImpl.deleteAllTask_UserAnswers()
+    }
+    override fun updateTaskPoints(taskId: Int, levelId: Int) {
+        val task = TaskImpl.getTaskById(taskId)
+        val level = LevelImpl.getLevelById(levelId)
+        if (task != null && level != null) {
+            LevelTaskImpl.updateLevel_Task(Level_Task(levelId = level.id, taskId = task.id, points = 1.0))
+        }
     }
 }

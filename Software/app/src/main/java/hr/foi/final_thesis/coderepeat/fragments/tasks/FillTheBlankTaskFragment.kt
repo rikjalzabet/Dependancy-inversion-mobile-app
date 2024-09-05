@@ -84,7 +84,9 @@ class FillTheBlankTaskFragment(
                 taskHandler.validateUserAnswerWithCorrectAnswer(lastUserAnswer.id, taskId)
             Log.d("TaskGameInfo", "FILL_IN_THE_BLANK - User Answer: $userAnswer")
             Log.d("TaskGameInfo", "FILL_IN_THE_BLANK - Is Correct: $isCorrect")
-
+            if(isCorrect){
+                taskHandler.updateTaskPoints(taskId, levelId)
+            }
             withContext(Dispatchers.IO) {
                 if(currentTaskIndex==totalTasks-1){
                     (activity as LevelActivity).loadNextTask()

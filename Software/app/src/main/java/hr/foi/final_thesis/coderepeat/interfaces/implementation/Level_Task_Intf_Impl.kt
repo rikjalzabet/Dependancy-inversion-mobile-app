@@ -32,6 +32,11 @@ class Level_Task_Intf_Impl (private val level_taskDao: Level_TaskDAO) : ILevel_T
     override fun updateLevel_Task(level_task: Level_Task) {
         level_taskDao.updateLevel_Task(level_task)
     }
+
+    override fun updatePointsLevel_Task(levelId: Int, taskId: Int, points: Double) {
+        level_taskDao.updatePointsLevel_Task(levelId, taskId, points)
+    }
+
     override fun deleteLevel_Task(levelId: Int, taskId: Int) {
         level_taskDao.deleteLevel_Task(levelId, taskId)
     }

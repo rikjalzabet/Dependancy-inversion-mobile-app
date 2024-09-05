@@ -99,7 +99,9 @@ class MatchTheAnswersTaskFragment (
 
             Log.d("TaskGameInfo", "MATCH_THE_ANSWERS - User Answer: ${lastUserAnswer.userAnswer}, ${taskHandler.getTask(taskId)?.question}")
             Log.d("TaskGameInfo", "MATCH_THE_ANSWERS - Is Correct: $isCorrect, ${taskHandler.getTask(taskId)?.question}")
-
+            if(isCorrect){
+                taskHandler.updateTaskPoints(taskId, levelId)
+            }
             withContext(Dispatchers.IO) {
                 if(currentTaskIndex==totalTasks-1){
                     (activity as LevelActivity).loadNextTask()

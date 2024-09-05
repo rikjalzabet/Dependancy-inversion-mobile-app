@@ -21,6 +21,7 @@ import hr.foi.final_thesis.coderepeat.database.StreakDAO
 import hr.foi.final_thesis.coderepeat.database.TaskDAO
 import hr.foi.final_thesis.coderepeat.database.Task_UserAnswerDAO
 import hr.foi.final_thesis.coderepeat.database.UserAnswerDAO
+import hr.foi.final_thesis.coderepeat.entities.Level_Task
 import hr.foi.final_thesis.coderepeat.entities.Task
 import hr.foi.final_thesis.coderepeat.entities.UserAnswer
 import hr.foi.final_thesis.coderepeat.helpers.DateConverter
@@ -46,11 +47,13 @@ class LevelSummaryActivity(): AppCompatActivity() {
     private lateinit var taskUserAnswer: Task_UserAnswerDAO
     private lateinit var userAnswer: UserAnswerDAO
     private lateinit var streakDao: StreakDAO
+    private lateinit var levelDao: LevelDAO
 
     private lateinit var taskUserAnswerImpl: Task_UserAnswer_intf_impl
     private lateinit var userAnswerImpl: UserAnswer_intf_impl
     private lateinit var levelTaskImpl: Level_Task_Intf_Impl
     private lateinit var streakIntfImpl: Streak_Intf_Impl
+    private lateinit var levelIntfImpl: Level_Intf_Impl
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var closeTheSummary: Button
@@ -72,12 +75,15 @@ class LevelSummaryActivity(): AppCompatActivity() {
         taskUserAnswer = db.task_userAnswerDao()
         userAnswer = db.userAnswerDao()
         streakDao = db.streakDao()
+        levelDao= db.levelDao()
+
         taskUserAnswerImpl = Task_UserAnswer_intf_impl(taskUserAnswer)
         userAnswerImpl = UserAnswer_intf_impl(userAnswer)
         levelTaskImpl = Level_Task_Intf_Impl(levelTaskDao)
         streakIntfImpl= Streak_Intf_Impl(streakDao)
+        levelIntfImpl= Level_Intf_Impl(levelDao)
+        //Log.d("LevelSummaryActivity", "Level ID: $levelId")
 
-            Log.d("LevelSummaryActivity", "Level ID: $levelId")
         CoroutineScope(Dispatchers.IO).launch {
             val taskList=levelTaskImpl.getTasksForLevel(levelId)
             val userAnswersForTasks = taskList.map { task ->
@@ -89,9 +95,28 @@ class LevelSummaryActivity(): AppCompatActivity() {
                 val adapter = LevelSummaryAdapter(levelId, userAnswerImpl, levelTaskImpl, taskUserAnswerImpl, taskList, userAnswersForTasks)
                 recyclerView.adapter = adapter
             }
+
+            var score = 0
+            val currentLevel = levelIntfImpl.getLevelById(levelId)
+            val tasksForCurrentLevel = levelTaskImpl.getTasksForLevel(levelId)
+            for (task in tasksForCurrentLevel) {
+                val LevelTaskPoints = levelTaskImpl.getPointsForLevelTask(levelId, task.id)
+                if (LevelTaskPoints>0) {
+                    score++
+                }
+            }
+            if(score > currentLevel?.score!!){
+                currentLevel?.score = score
+                levelIntfImpl.updateLevel(currentLevel!!)
+                for (task in tasksForCurrentLevel) {
+                    levelTaskImpl.updatePointsLevel_Task(levelId, task.id,0.0)
+                }
+            }else{
+                Log.i("LevelSumAct","Score is not higher than the current score")
+            }
+
         }
         recyclerView.layoutManager = LinearLayoutManager(this)
-
 
         closeTheSummary.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {

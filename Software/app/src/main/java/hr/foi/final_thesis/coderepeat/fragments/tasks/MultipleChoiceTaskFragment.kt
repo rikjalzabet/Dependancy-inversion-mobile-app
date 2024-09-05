@@ -114,7 +114,9 @@ class MultipleChoiceTaskFragment(
             val isCorrect = taskHandler.validateUserAnswerWithCorrectAnswer(userAnswer.id, taskId)
             Log.d("TaskGameInfo", "MULTIPLE_CHOICE_MULTIPLE_ANSWERS - User Answer: $selectedAnswersString, ${taskHandler.getTask(taskId)?.question}")
             Log.d("TaskGameInfo", "MULTIPLE_CHOICE_MULTIPLE_ANSWERS - Is Correct: $isCorrect, ${taskHandler.getTask(taskId)?.question}")
-
+            if(isCorrect){
+                taskHandler.updateTaskPoints(taskId, levelId)
+            }
             withContext(Dispatchers.IO) {
                 if(currentTaskIndex==totalTasks-1){
                     (activity as LevelActivity).loadNextTask()
