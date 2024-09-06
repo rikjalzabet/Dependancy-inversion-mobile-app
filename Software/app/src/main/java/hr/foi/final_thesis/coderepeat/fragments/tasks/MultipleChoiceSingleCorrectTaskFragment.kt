@@ -79,10 +79,11 @@ class MultipleChoiceSingleCorrectTaskFragment(
     }
 
     private fun handleNextButtonClick() {
-        val selectedOptionId = optionsRadioGroup.checkedRadioButtonId
+        var selectedOptionId = optionsRadioGroup.checkedRadioButtonId
         if (selectedOptionId == -1) {
             activity?.runOnUiThread {
                 Toast.makeText(context, "Please select an answer", Toast.LENGTH_SHORT).show()
+                selectedOptionId=-1
             }
             return
         }

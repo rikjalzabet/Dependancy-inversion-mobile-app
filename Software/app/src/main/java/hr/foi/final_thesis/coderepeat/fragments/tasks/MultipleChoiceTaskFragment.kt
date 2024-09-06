@@ -90,7 +90,7 @@ class MultipleChoiceTaskFragment(
     }
 
     private suspend fun handleNextButtonClick() {
-        val selectedAnswers = mutableListOf<String>()
+        var selectedAnswers = mutableListOf<String>()
         for (i in 0 until checkboxesLayout.childCount) {
             val checkBox = checkboxesLayout.getChildAt(i) as CheckBox
             if (checkBox.isChecked) {
@@ -101,6 +101,7 @@ class MultipleChoiceTaskFragment(
             activity?.runOnUiThread {
                 Toast.makeText(context, "Please select at least one answer", Toast.LENGTH_SHORT)
                     .show()
+                selectedAnswers = mutableListOf()
             }
             return
         }

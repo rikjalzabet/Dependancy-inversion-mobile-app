@@ -6,7 +6,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import hr.foi.final_thesis.coderepeat.database.DatabaseManager
+import hr.foi.final_thesis.coderepeat.fragments.ListSectionFragment
+import hr.foi.final_thesis.coderepeat.fragments.StreakFragment
 import hr.foi.final_thesis.coderepeat.interfaces.navigation.AppNavigation
+import hr.foi.final_thesis.coderepeat.interfaces.navigation.AppNavigation_Intf_Impl
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appNavigation: AppNavigation
@@ -17,7 +20,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val bottomNavigationBar: BottomNavigationView=findViewById(R.id.activity_main_BNV_bottom_navigation)
 
-        appNavigation=(applicationContext as ApplicationMain).serviceLocator.provideNavigator(this)
+        //appNavigation=(applicationContext as ApplicationMain).serviceLocator.provideNavigator(this)
+        val appNavigationImpl = AppNavigation_Intf_Impl(
+            this,
+            listOf(
+                ListSectionFragment(),
+                StreakFragment()
+            )
+        )
+        appNavigation = (applicationContext as ApplicationMain).getServiceLocator(appNavigationImpl).provideNavigator()
+
         if(savedInstanceState==null){
             appNavigation.navigateToHome()
         }
@@ -33,12 +45,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }*/
 
         DatabaseManager.initializeDatabase(this) {
             Log.d("Database", "Database initialized")

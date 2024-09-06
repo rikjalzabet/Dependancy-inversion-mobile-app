@@ -69,10 +69,11 @@ class FillTheBlankTaskFragment(
     }
 
     private fun handleNextButtonClick() {
-        val userAnswer = userAnswerEditText.text.toString().trim().lowercase()
-        if (userAnswer.isEmpty()) {
+        var userAnswer = userAnswerEditText.text.toString().trim().lowercase()
+        if (userAnswer.isEmpty() || userAnswer=="") {
             activity?.runOnUiThread {
                 Toast.makeText(context, "Please fill in the blank", Toast.LENGTH_SHORT).show()
+                userAnswer=""
             }
             return
         }
