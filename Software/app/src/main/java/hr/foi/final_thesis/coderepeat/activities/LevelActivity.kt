@@ -25,6 +25,7 @@ import hr.foi.final_thesis.coderepeat.interfaces.implementation.Task_Intf_Impl
 import hr.foi.final_thesis.coderepeat.interfaces.implementation.Task_UserAnswer_intf_impl
 import hr.foi.final_thesis.coderepeat.interfaces.implementation.UserAnswer_intf_impl
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.FillTheBlankTask
+import hr.foi.final_thesis.coderepeat.interfaces.tasks.ITaskHandler
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.MatchTheAnswersTask
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.MultipleChoiceSingleChoiceTask
 import hr.foi.final_thesis.coderepeat.interfaces.tasks.MultipleChoiceTask
@@ -46,6 +47,8 @@ class LevelActivity : AppCompatActivity() {
     private lateinit var multipleChoiceMultipleCorrectTaskAdapter: MultipleChoiceAdapter
     private lateinit var fillTheBlankTaskAdapter: FillTheBlankAdapter
     private lateinit var matchTheAnswerTaskAdapter: MatchTheAnswersAdapter
+
+    private lateinit var taskHandler: ITaskHandler
 
     private var currentTaskIndex: Int = 0
     private var levelId: Int = 0
@@ -113,6 +116,14 @@ class LevelActivity : AppCompatActivity() {
             UserAnswer_intf_impl(userAnswer)
         ))
 
+        taskHandler=YesNoTask(
+            Level_Intf_Impl(levelDao),
+            Task_Intf_Impl(taskDao),
+            Level_Task_Intf_Impl(levelTaskDao),
+            Task_UserAnswer_intf_impl(taskUserAnswer),
+            UserAnswer_intf_impl(userAnswer)
+        )
+
         CoroutineScope(Dispatchers.IO).launch {
             tasks = levelTaskDao.getTasksForLevel(levelId)
             val level = levelDao.getLevelById(levelId)
@@ -163,6 +174,10 @@ class LevelActivity : AppCompatActivity() {
             .setTitle("Exit Level")
             .setMessage("Do you want to exit the current level? By exiting now your current progress will NOT be saved!")
             .setPositiveButton("Yes") { dialog, which ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    taskHandler.deleteAllUserAnswers()
+                    taskHandler.deleteAllTask_UserAnswers()
+                }
                 super.onBackPressed()
             }
             .setNegativeButton("No", null)

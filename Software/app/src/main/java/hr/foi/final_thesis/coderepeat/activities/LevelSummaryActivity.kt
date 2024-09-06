@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -166,5 +167,19 @@ class LevelSummaryActivity(): AppCompatActivity() {
                 startActivity(intent)
                 finish()
         }
+    }
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setTitle("Exit Level")
+            .setMessage("Do you want to exit the current level? By exiting now your current progress will NOT be saved!")
+            .setPositiveButton("Yes") { dialog, which ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    taskHandler.deleteAllUserAnswers()
+                    taskHandler.deleteAllTask_UserAnswers()
+                }
+                super.onBackPressed()
+            }
+            .setNegativeButton("No", null)
+            .show()
     }
 }
