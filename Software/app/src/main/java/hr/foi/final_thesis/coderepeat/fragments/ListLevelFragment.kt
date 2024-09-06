@@ -49,7 +49,6 @@ class ListLevelFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val tasks = levelTaskDao.getTasksForLevel(levelId)
             withContext(Dispatchers.Main) {
-                //recyclerView.adapter= TaskAdapter(tasks)
             }
         }
     }

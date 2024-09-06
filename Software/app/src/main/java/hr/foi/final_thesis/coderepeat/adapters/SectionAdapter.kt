@@ -46,7 +46,6 @@ class SectionAdapter(
         val section = sections[position]
         holder.sectionTitle.text = section.title
 
-
         CoroutineScope(Dispatchers.IO).launch {
             val levels = sectionLevel.getLevelsForSection(section.id)
             Log.i("SectionAdapter", "SectionLevel: $levels")

@@ -15,13 +15,6 @@ import hr.foi.final_thesis.coderepeat.database.DatabaseManager
 class WaitingScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*enableEdgeToEdge()
-        setContentView(R.layout.activity_waiting_screen)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }*/
         setContentView(R.layout.activity_waiting_screen)
         DatabaseManager.initializeDatabase(this) {
             Handler(Looper.getMainLooper()).postDelayed({

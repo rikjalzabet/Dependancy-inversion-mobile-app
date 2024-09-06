@@ -40,6 +40,7 @@ class LevelActivity : AppCompatActivity() {
     private lateinit var taskDao: TaskDAO
     private lateinit var taskUserAnswer: Task_UserAnswerDAO
     private lateinit var userAnswer: UserAnswerDAO
+
     private lateinit var yesNoTaskAdapter: YesNoAdapter
     private lateinit var multipleChoiceSingleCorrectTaskAdapter: MultipleChoiceSingleCorrectAdapter
     private lateinit var multipleChoiceMultipleCorrectTaskAdapter: MultipleChoiceAdapter
@@ -120,7 +121,6 @@ class LevelActivity : AppCompatActivity() {
                 Log.i("LevelActivity", "TaskID: ${task.id}, Task type: ${task.type} Task CA: ${task.correctAnswer}, Task Q: ${task.question} Task O: ${task.options}")
             }
             withContext(Dispatchers.Main) {
-
                 if (!tasks.isNullOrEmpty()) {
                     loadTaskFragment(tasks!![currentTaskIndex].id)
                 }
@@ -129,7 +129,6 @@ class LevelActivity : AppCompatActivity() {
     }
     private suspend fun loadTaskFragment(taskId: Int) {
         val task = tasks?.find { it.id == taskId }
-
         val fragment = when (task?.type) {
             "YES_NO" -> yesNoTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size, levelId)
             "MULTIPLE_CHOICE_SINGLE_ANSWER" -> multipleChoiceSingleCorrectTaskAdapter.createFragment(taskId, currentTaskIndex, tasks!!.size, levelId)

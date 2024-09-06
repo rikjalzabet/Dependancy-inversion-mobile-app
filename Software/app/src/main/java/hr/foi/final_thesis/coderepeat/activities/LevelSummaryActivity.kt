@@ -71,6 +71,7 @@ class LevelSummaryActivity(): AppCompatActivity() {
         Log.i("LevelSumAct","Here i am")
         recyclerView= findViewById(R.id.activity_level_summary_rv_summary_data)
         closeTheSummary=findViewById(R.id.activity_level_summary_btn_done)
+
         levelTaskDao = db.level_taskDao()
         taskUserAnswer = db.task_userAnswerDao()
         userAnswer = db.userAnswerDao()
@@ -82,7 +83,6 @@ class LevelSummaryActivity(): AppCompatActivity() {
         levelTaskImpl = Level_Task_Intf_Impl(levelTaskDao)
         streakIntfImpl= Streak_Intf_Impl(streakDao)
         levelIntfImpl= Level_Intf_Impl(levelDao)
-        //Log.d("LevelSummaryActivity", "Level ID: $levelId")
 
         CoroutineScope(Dispatchers.IO).launch {
             val taskList=levelTaskImpl.getTasksForLevel(levelId)
