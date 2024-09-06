@@ -32,6 +32,7 @@ class StreakFragment : Fragment() {
     private var currentStreak=0
     private var startDate: String = ""
     private var lastActiveDate: String = ""
+
     private lateinit var streakDao: StreakDAO
 
     override fun onCreateView(
@@ -65,9 +66,9 @@ class StreakFragment : Fragment() {
     }
     private fun highlightDatesOnCalendar(){
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val startDate=LocalDate.parse(startDate,formatter)
-        val endLocalDate=LocalDate.parse(lastActiveDate,formatter)
-        val colorDays= generateSequence(startDate) { it.plusDays(1) }
+        val startDate = LocalDate.parse(startDate,formatter)
+        val endLocalDate = LocalDate.parse(lastActiveDate,formatter)
+        val colorDays = generateSequence(startDate) { it.plusDays(1) }
             .takeWhile { !it.isAfter(endLocalDate)}
             .map { CalendarDay.from(it.year,it.monthValue,it.dayOfMonth) }
             .toList()

@@ -28,14 +28,6 @@ class MultipleChoiceTaskFragment(
     private val totalTasks: Int,
     private val levelId: Int
 ) : Fragment() {
-
-
-   /* override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_multiple_choice_task, container, false)
-    }*/
     private lateinit var questionTextView: TextView
     private lateinit var checkboxesLayout: LinearLayout
     private lateinit var nextButton: Button

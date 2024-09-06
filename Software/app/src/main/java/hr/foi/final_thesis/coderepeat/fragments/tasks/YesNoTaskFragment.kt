@@ -108,7 +108,6 @@ class YesNoTaskFragment(
                         (activity as LevelActivity).loadNextTask()
                     }
                 }
-
             }
         }
 }

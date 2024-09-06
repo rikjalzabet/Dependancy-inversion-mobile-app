@@ -27,10 +27,11 @@ import kotlinx.coroutines.withContext
 
 
 class ListLevelFragment : Fragment() {
-    private lateinit var levelTaskDao: Level_TaskDAO
-    private lateinit var taskDAO: TaskDAO
     private lateinit var recyclerView: RecyclerView
     private var levelId: Int=0
+
+    private lateinit var levelTaskDao: Level_TaskDAO
+    private lateinit var taskDAO: TaskDAO
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

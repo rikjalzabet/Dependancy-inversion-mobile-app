@@ -34,12 +34,13 @@ import kotlinx.coroutines.withContext
 import populateData
 
 class ListSectionFragment : Fragment() {
-    //private lateinit var sectionDao: SectionDAO
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
+
     private lateinit var section: ISection
     private lateinit var sectionLevel: ISection_Level
     private lateinit var levelTask: ILevel_Task
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var progressBar: ProgressBar
+
     private lateinit var levelTaskDAO: Level_TaskDAO
     private lateinit var sectionDao: SectionDAO
     private lateinit var sectionLevelDAO: Section_LevelDAO
@@ -63,7 +64,6 @@ class ListSectionFragment : Fragment() {
         section = Section_Intf_Impl(sectionDao)
         sectionLevel = Section_Level_Intf_Impl(sectionLevelDAO)
         levelTask= Level_Task_Intf_Impl(levelTaskDAO)
-
 
         CoroutineScope(Dispatchers.IO).launch {
             val sections = section.getAllSections()
